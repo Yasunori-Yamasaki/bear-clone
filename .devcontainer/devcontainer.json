@@ -1,0 +1,47 @@
+{
+  "name": "bear-clone",
+  "build": {
+    "context": "..",
+    "dockerfile": "../Dockerfile"
+  },
+  "runArgs": ["--name", "bear-clone"],
+  "workspaceMount": "source=${localWorkspaceFolder}/,target=/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    "source=bear-clone-node_modules,target=/workspace/node_modules,type=volume"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Angular17のスニペット実行用プラグイン
+        "Mikael.Angular-BeastCode",
+        // Angularのテンプレートファイル内でもコード補完ができるようにするプラグイン
+        "Angular.ng-template",
+        // タグを変更した際に、ペアになっているタグも同時にリネームしてくれるプラグイン　＆　開始タグを記述すると自動で閉じタグも記述してくれるプラグイン
+        "formulahendry.auto-complete-tag",
+        // prettier integration
+        "esbenp.prettier-vscode",
+        // ファイルパスを自動保管してくれるプラグイン
+        "ionutvmi.path-autocomplete",
+        // 行末の余計なスペースを赤色表示してくれるプラグイン
+        "shardulm94.trailing-spaces",
+        // 全角スペースを視認しやすくするプラグイン
+        "mosapride.zenkaku",
+        // インデントに色付けをしてくれるプラグイン
+        "oderwat.indent-rainbow",
+        // VSCode内でテストコードの状況を把握できるjest用プラグイン
+        "Orta.vscode-jest"
+      ],
+      "settings": {
+        "spellright.language": ["en"],
+        "spellright.documentTypes": ["markdown"],
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "eslint.format.enable": true,
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      }
+    }
+  }
+}
