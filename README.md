@@ -13,21 +13,31 @@ Markdown 記法のメモアプリ『Bear』のクローン作成用リポジト�
 
 ### node バージョン
 
-- node v20.11.1
-- npm v10.2.4
+- node
+  - v20.11.1
+- npm
+  - v10.2.4
 
-### フロント
+### フロント + 状態管理
 
-- [Angular](https://angular.jp/docs) 17.0.0
-- [typescript](https://www.typescriptlang.org/) 5.4.2
+- [Angular](https://angular.jp/docs)
+  - v17.0.0
+- [typescript](https://www.typescriptlang.org/)
+  - v5.4.2
+- [NgRx](https://ngrx.io/docs)
+  - v17.2.0
 
-### スタイル
+### スタイル + コード整形
 
 - [TailwindCSS](https://tailwindcss.com/docs/installation)
+  - v3.4.4
+- [Prettier](https://prettier.io/docs/en/)
+  - v3.3.1
 
 ### テスト関連
 
 - [Jest](https://jestjs.io/ja/)
+  - v29.7.0
 
 <h2 id="environment-construction-rocedure">環境構築手順</h2>
 
