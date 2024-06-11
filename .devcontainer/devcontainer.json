@@ -8,7 +8,7 @@
   "workspaceMount": "source=${localWorkspaceFolder}/,target=/workspace,type=bind,consistency=cached",
   "workspaceFolder": "/workspace",
   "mounts": [
-    "source=bear-clone-node_modules,target=/workspace/node_modules,type=volume"
+    "source=bear-clone-node_modules,target=/workspace/bear-clone/node_modules,type=volume"
   ],
   "customizations": {
     "vscode": {
