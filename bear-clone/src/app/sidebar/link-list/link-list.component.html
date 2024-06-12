@@ -1,5 +1,5 @@
 <div
-  class="relative flex gap-3 py-0.5 pl-8"
+  class="relative flex select-none gap-3 py-0.5 pl-8"
   [ngClass]="{ 'rounded-md bg-[#FF4C43]': selectedCategory === wrapCategory.name }"
   (click)="selectCategory(wrapCategory.name)"
 >
@@ -17,7 +17,7 @@
     @for (category of wrapCategory.categories; track category) {
       <li>
         <div
-          class="flex gap-3 py-0.5 pl-12"
+          class="flex select-none gap-3 py-0.5 pl-12"
           [ngClass]="{ 'rounded-md bg-[#FF4C43]': selectedCategory === category.name }"
           (click)="selectCategory(category.name)"
         >
