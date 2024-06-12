@@ -15,6 +15,7 @@ import { LinkListComponent } from "./link-list/link-list.component";
 export type Category = {
   name: string;
   icon: IconDefinition;
+  isOpen: boolean;
   categories?: Category[];
 };
 
@@ -44,28 +45,40 @@ export class SidebarComponent {
     {
       name: "Notes",
       icon: faNoteSticky,
+      isOpen: false,
       categories: [
         {
           name: "Untagged",
           icon: faFolder,
+          isOpen: false,
+          categories: [
+            {
+              name: "test",
+              icon: faFolder,
+              isOpen: false,
+            },
+          ],
         },
         {
           name: "Todo",
           icon: faSquareCheck,
+          isOpen: false,
         },
         {
           name: "Today",
           icon: faCalendar,
+          isOpen: false,
         },
         {
           name: "Locked",
           icon: faLock,
+          isOpen: false,
         },
       ],
     },
-    { name: "Trash", icon: faTrashCan },
-    { name: "bear", icon: faAngular },
-    { name: "tag", icon: faHashtag },
+    { name: "Trash", icon: faTrashCan, isOpen: false },
+    { name: "bear", icon: faAngular, isOpen: false },
+    { name: "tag", icon: faHashtag, isOpen: false },
   ];
 
   /**

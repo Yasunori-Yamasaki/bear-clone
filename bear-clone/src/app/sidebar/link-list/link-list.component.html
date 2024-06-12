@@ -1,38 +1,38 @@
 <div
-  class="relative flex select-none gap-3 py-0.5 pl-8"
+  class="select-none py-0.5 pl-8"
   [ngClass]="{ 'rounded-md bg-[#FF4C43]': selectedCategory === wrapCategory.name }"
   (click)="selectCategory(wrapCategory.name)"
 >
-  @if (!!wrapCategory.categories) {
-    @if (isOpen) {
-      <fa-icon
-        class="absolute left-2"
-        [icon]="faAngleDown"
-        (click)="toggleOpen(false)"
-        (click)="disableToggle($event)"
-      />
-    } @else {
-      <fa-icon
-        class="absolute left-2"
-        [icon]="faAngleRight"
-        (click)="toggleOpen(true)"
-        (click)="disableToggle($event)"
-      />
+  <div class="relative flex gap-3">
+    @if (!!wrapCategory.categories) {
+      @if (wrapCategory.isOpen) {
+        <fa-icon
+          class="absolute -left-6"
+          [icon]="faAngleDown"
+          (click)="toggleOpenCategory(wrapCategory, false)"
+          (click)="disableToggle($event)"
+        />
+      } @else {
+        <fa-icon
+          class="absolute -left-6"
+          [icon]="faAngleRight"
+          (click)="toggleOpenCategory(wrapCategory, true)"
+          (click)="disableToggle($event)"
+        />
+      }
     }
-  }
-  <fa-icon [icon]="wrapCategory.icon" />{{ wrapCategory.name }}
+    <fa-icon [icon]="wrapCategory.icon" />{{ wrapCategory.name }}
+  </div>
 </div>
-@if (!!wrapCategory.categories && isOpen) {
+@if (!!wrapCategory.categories && wrapCategory.isOpen) {
   <ul>
     @for (category of wrapCategory.categories; track category) {
       <li>
-        <div
-          class="flex select-none gap-3 py-0.5 pl-12"
-          [ngClass]="{ 'rounded-md bg-[#FF4C43]': selectedCategory === category.name }"
-          (click)="selectCategory(category.name)"
-        >
-          <fa-icon [icon]="category.icon" />{{ category.name }}
-        </div>
+        <app-link-list
+          [selectedCategory]="selectedCategory"
+          [wrapCategory]="category"
+          (select)="selectCategory($event)"
+        />
       </li>
     }
   </ul>

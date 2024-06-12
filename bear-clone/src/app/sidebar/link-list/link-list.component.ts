@@ -33,10 +33,11 @@ export class LinkListComponent {
 
   /**
    * 下層カテゴリの表示フラグ切り替え処理
+   * @param category 選択したカテゴリオブジェクト
    * @param bool トグル開閉の真偽値
    */
-  toggleOpen(bool: boolean): void {
-    this.isOpen = bool;
+  toggleOpenCategory(category: Category, bool: boolean): void {
+    category.isOpen = bool;
   }
 
   /**
