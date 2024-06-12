@@ -22,4 +22,14 @@ export class LinkListComponent {
   faLock = faLock;
   faNoteSticky = faNoteSticky;
   faSquareCheck = faSquareCheck;
+
+  isOpen = false;
+
+  /**
+   * 下層カテゴリの表示フラグ切り替え処理
+   * @param bool トグル開閉の真偽値
+   */
+  toggleOpen(bool: boolean): void {
+    this.isOpen = bool;
+  }
 }

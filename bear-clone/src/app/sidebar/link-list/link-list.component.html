@@ -1,18 +1,24 @@
 <div class="relative flex gap-3 rounded-md bg-[#FF4C43] py-0.5 pl-8">
-  <fa-icon class="absolute left-2" [icon]="faAngleDown" />
+  @if (isOpen) {
+    <fa-icon class="absolute left-2" [icon]="faAngleDown" (click)="toggleOpen(false)" />
+  } @else {
+    <fa-icon class="absolute left-2" [icon]="faAngleRight" (click)="toggleOpen(true)" />
+  }
   <fa-icon [icon]="faNoteSticky" />Notes
 </div>
-<ul>
-  <li>
-    <div class="flex gap-3 py-0.5 pl-12"><fa-icon [icon]="faFolder" />Untagged</div>
-  </li>
-  <li>
-    <div class="flex gap-3 py-0.5 pl-12"><fa-icon [icon]="faSquareCheck" />Todo</div>
-  </li>
-  <li>
-    <div class="flex gap-3 py-0.5 pl-12"><fa-icon [icon]="faCalendar" />Today</div>
-  </li>
-  <li>
-    <div class="flex gap-3 py-0.5 pl-12"><fa-icon [icon]="faLock" />Locked</div>
-  </li>
-</ul>
+@if (isOpen) {
+  <ul>
+    <li>
+      <div class="flex gap-3 py-0.5 pl-12"><fa-icon [icon]="faFolder" />Untagged</div>
+    </li>
+    <li>
+      <div class="flex gap-3 py-0.5 pl-12"><fa-icon [icon]="faSquareCheck" />Todo</div>
+    </li>
+    <li>
+      <div class="flex gap-3 py-0.5 pl-12"><fa-icon [icon]="faCalendar" />Today</div>
+    </li>
+    <li>
+      <div class="flex gap-3 py-0.5 pl-12"><fa-icon [icon]="faLock" />Locked</div>
+    </li>
+  </ul>
+}
