@@ -1,0 +1,39 @@
+{
+  "name": "bear-clone",
+  "build": {
+    "context": "..",
+    "dockerfile": "../Dockerfile"
+  },
+  "runArgs": ["--name", "bear-clone"],
+  "workspaceMount": "source=${localWorkspaceFolder}/,target=/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    "source=bear-clone-node_modules,target=/workspace/bear-clone/node_modules,type=volume"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Mikael.Angular-BeastCode",
+        "Angular.ng-template",
+        "formulahendry.auto-complete-tag",
+        "esbenp.prettier-vscode",
+        "ionutvmi.path-autocomplete",
+        "shardulm94.trailing-spaces",
+        "mosapride.zenkaku",
+        "oderwat.indent-rainbow",
+        "Orta.vscode-jest",
+        "bradlc.vscode-tailwindcss"
+      ],
+      "settings": {
+        "spellright.language": ["en"],
+        "spellright.documentTypes": ["markdown"],
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "eslint.format.enable": true,
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      }
+    }
+  }
+}
