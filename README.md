@@ -21,7 +21,7 @@ Markdown 記法のメモアプリ『Bear』のクローン作成用リポジト�
 ### フロント + 状態管理
 
 - [Angular](https://angular.jp/docs)
-  - v17.0.0
+  - v17.3.11
 - [typescript](https://www.typescriptlang.org/)
   - v5.4.2
 - [NgRx](https://ngrx.io/docs)
