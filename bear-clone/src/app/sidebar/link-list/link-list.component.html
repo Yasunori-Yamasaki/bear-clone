@@ -1,4 +1,8 @@
-<div class="relative flex gap-3 rounded-md bg-[#FF4C43] py-0.5 pl-8">
+<div
+  class="relative flex gap-3 py-0.5 pl-8"
+  [ngClass]="{ 'rounded-md bg-[#FF4C43]': selectedCategory === wrapCategory.name }"
+  (click)="selectCategory(wrapCategory.name)"
+>
   @if (!!wrapCategory.categories) {
     @if (isOpen) {
       <fa-icon class="absolute left-2" [icon]="faAngleDown" (click)="toggleOpen(false)" />
@@ -12,7 +16,11 @@
   <ul>
     @for (category of wrapCategory.categories; track category) {
       <li>
-        <div class="flex gap-3 py-0.5 pl-12">
+        <div
+          class="flex gap-3 py-0.5 pl-12"
+          [ngClass]="{ 'rounded-md bg-[#FF4C43]': selectedCategory === category.name }"
+          (click)="selectCategory(category.name)"
+        >
           <fa-icon [icon]="category.icon" />{{ category.name }}
         </div>
       </li>

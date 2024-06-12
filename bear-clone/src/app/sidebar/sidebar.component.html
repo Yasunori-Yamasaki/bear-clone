@@ -1,5 +1,9 @@
 <nav class="h-[100vh] w-44 bg-[#2E3236] px-1 py-8 text-sm text-[#FFFFFF]">
   @for (wrapCategory of wrapCategories; track wrapCategory) {
-    <app-link-list [wrapCategory]="wrapCategory" />
+    <app-link-list
+      [selectedCategory]="selectedCategory"
+      [wrapCategory]="wrapCategory"
+      (select)="onSelect($event)"
+    />
   }
 </nav>

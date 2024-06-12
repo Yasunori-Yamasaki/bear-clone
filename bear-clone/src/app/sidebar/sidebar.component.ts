@@ -36,6 +36,8 @@ export class SidebarComponent {
   faSquareCheck = faSquareCheck;
   faTrashCan = faTrashCan;
 
+  selectedCategory = "Notes";
+
   // ToDo: データ格納場所を変更 & タグカテゴリー分はデータ取得するように修正。
 
   wrapCategories: Category[] = [
@@ -65,4 +67,12 @@ export class SidebarComponent {
     { name: "bear", icon: faAngular },
     { name: "tag", icon: faHashtag },
   ];
+
+  /**
+   * 選択したカテゴリー名を保持する。
+   * @param categoryName 選択したカテゴリー名
+   */
+  onSelect(categoryName: string): void {
+    this.selectedCategory = categoryName;
+  }
 }
