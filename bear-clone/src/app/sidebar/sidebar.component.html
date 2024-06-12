@@ -1,1 +1,20 @@
-<p>sidebar works!</p>
+<nav>
+  <div><fa-icon [icon]="faAngleDown" /><fa-icon [icon]="faNoteSticky" />Notes</div>
+  <ul>
+    <li>
+      <div><fa-icon [icon]="faFolder" />Untagged</div>
+    </li>
+    <li>
+      <div><fa-icon [icon]="faSquareCheck" />Todo</div>
+    </li>
+    <li>
+      <div><fa-icon [icon]="faCalendar" />Today</div>
+    </li>
+    <li>
+      <div><fa-icon [icon]="faLock" />Locked</div>
+    </li>
+  </ul>
+  <div><fa-icon [icon]="faTrashCan" />Trash</div>
+  <div><fa-icon [icon]="faAngleRight" /><fa-icon [icon]="faAngular" />bear</div>
+  <div><fa-icon [icon]="faAngleRight" /><fa-icon [icon]="faHashtag" />tag</div>
+</nav>
