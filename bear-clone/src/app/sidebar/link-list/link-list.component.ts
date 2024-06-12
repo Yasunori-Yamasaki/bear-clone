@@ -46,4 +46,11 @@ export class LinkListComponent {
   selectCategory(categoryName: string): void {
     this.select.emit(categoryName);
   }
+
+  /**
+   * トグルボタンを押しても選択状態にならないようにするための処理
+   */
+  disableToggle(event: Event): void {
+    event.stopPropagation();
+  }
 }

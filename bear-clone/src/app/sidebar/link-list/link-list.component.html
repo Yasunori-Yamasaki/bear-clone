@@ -5,9 +5,19 @@
 >
   @if (!!wrapCategory.categories) {
     @if (isOpen) {
-      <fa-icon class="absolute left-2" [icon]="faAngleDown" (click)="toggleOpen(false)" />
+      <fa-icon
+        class="absolute left-2"
+        [icon]="faAngleDown"
+        (click)="toggleOpen(false)"
+        (click)="disableToggle($event)"
+      />
     } @else {
-      <fa-icon class="absolute left-2" [icon]="faAngleRight" (click)="toggleOpen(true)" />
+      <fa-icon
+        class="absolute left-2"
+        [icon]="faAngleRight"
+        (click)="toggleOpen(true)"
+        (click)="disableToggle($event)"
+      />
     }
   }
   <fa-icon [icon]="wrapCategory.icon" />{{ wrapCategory.name }}
