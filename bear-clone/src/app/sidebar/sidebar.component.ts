@@ -9,11 +9,12 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faAngleDown, faAngleRight, faHashtag, faLock } from "@fortawesome/free-solid-svg-icons";
 import { faAngular } from "@fortawesome/free-brands-svg-icons";
+import { LinkListComponent } from "./link-list/link-list.component";
 
 @Component({
   selector: "app-sidebar",
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, LinkListComponent],
   templateUrl: "./sidebar.component.html",
 })
 export class SidebarComponent {
