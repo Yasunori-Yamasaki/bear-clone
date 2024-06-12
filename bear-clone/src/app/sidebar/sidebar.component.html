@@ -1,10 +1,5 @@
 <nav class="h-[100vh] w-44 bg-[#2E3236] px-1 py-8 text-sm text-[#FFFFFF]">
-  <app-link-list />
-  <div class="flex gap-3 py-0.5 pl-8"><fa-icon [icon]="faTrashCan" />Trash</div>
-  <div class="relative flex gap-3 py-0.5 pl-8">
-    <fa-icon class="absolute left-2" [icon]="faAngleRight" /><fa-icon [icon]="faAngular" />bear
-  </div>
-  <div class="relative flex gap-3 py-0.5 pl-8">
-    <fa-icon class="absolute left-2" [icon]="faAngleRight" /><fa-icon [icon]="faHashtag" />tag
-  </div>
+  @for (wrapCategory of wrapCategories; track wrapCategory) {
+    <app-link-list [wrapCategory]="wrapCategory" />
+  }
 </nav>

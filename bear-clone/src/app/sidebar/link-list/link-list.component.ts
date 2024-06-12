@@ -1,19 +1,13 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
-  IconDefinition,
   faCalendar,
   faFolder,
   faNoteSticky,
   faSquareCheck,
 } from "@fortawesome/free-regular-svg-icons";
 import { faAngleDown, faAngleRight, faLock } from "@fortawesome/free-solid-svg-icons";
-
-type Category = {
-  name: string;
-  icon: IconDefinition;
-  categories?: Category[];
-};
+import { Category } from "../sidebar.component";
 
 @Component({
   selector: "app-link-list",
@@ -22,6 +16,8 @@ type Category = {
   templateUrl: "./link-list.component.html",
 })
 export class LinkListComponent {
+  @Input() wrapCategory!: Category;
+
   faAngleDown = faAngleDown;
   faAngleRight = faAngleRight;
   faCalendar = faCalendar;
@@ -31,30 +27,6 @@ export class LinkListComponent {
   faSquareCheck = faSquareCheck;
 
   isOpen = false;
-
-  // ToDo: 親コンポーネントからのデータ受け取りに変更する。
-  wrapCategory: Category = {
-    name: "Notes",
-    icon: faNoteSticky,
-    categories: [
-      {
-        name: "Untagged",
-        icon: faFolder,
-      },
-      {
-        name: "Todo",
-        icon: faSquareCheck,
-      },
-      {
-        name: "Today",
-        icon: faCalendar,
-      },
-      {
-        name: "Locked",
-        icon: faLock,
-      },
-    ],
-  };
 
   /**
    * 下層カテゴリの表示フラグ切り替え処理
