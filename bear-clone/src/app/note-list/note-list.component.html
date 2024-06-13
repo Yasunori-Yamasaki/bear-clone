@@ -2,16 +2,31 @@
   class="solid h-[100vh] w-60 overflow-y-auto border-r border-zinc-300"
   (click)="selectedNote = null"
 >
-  <header class="sticky top-0 flex items-center justify-between bg-white p-1">
-    <div class="p-2 font-bold">Notes</div>
-    <div class="flex gap-2 text-xl text-[#888889]">
-      <button class="h-8 w-9 rounded-md hover:bg-zinc-100">
-        <fa-icon [icon]="faPenToSquare" />
+  <header
+    class="sticky top-0 flex h-12 items-center justify-between bg-white p-1"
+    [ngClass]="{ 'relative px-2': isSearchMode }"
+  >
+    @if (isSearchMode) {
+      <input
+        type="text"
+        class="solid w-full rounded-md border-4 border-[#F4BABA] pl-6 placeholder:text-sm focus:outline-none"
+        placeholder="Search"
+      />
+      <fa-icon [icon]="faMagnifyingGlass" class="absolute left-4 text-sm text-[#888889]" />
+      <button class="absolute right-4 text-[#888889]" (click)="toggleSearchMode()">
+        <fa-icon [icon]="faCircleXmark" />
       </button>
-      <button class="h-8 w-9 rounded-md hover:bg-zinc-100">
-        <fa-icon [icon]="faMagnifyingGlass" />
-      </button>
-    </div>
+    } @else {
+      <div class="p-2 font-bold">Notes</div>
+      <div class="flex gap-2 text-xl text-[#888889]">
+        <button class="h-8 w-9 rounded-md hover:bg-zinc-100">
+          <fa-icon [icon]="faPenToSquare" />
+        </button>
+        <button class="h-8 w-9 rounded-md hover:bg-zinc-100" (click)="toggleSearchMode()">
+          <fa-icon [icon]="faMagnifyingGlass" />
+        </button>
+      </div>
+    }
   </header>
   <ul class="px-2">
     @for (note of notes; track note) {

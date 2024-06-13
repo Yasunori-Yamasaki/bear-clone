@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CommonModule } from "@angular/common";
@@ -21,8 +21,10 @@ type Note = {
 export class NoteListComponent {
   protected faMagnifyingGlass = faMagnifyingGlass;
   protected faPenToSquare = faPenToSquare;
+  protected faCircleXmark = faCircleXmark;
 
-  selectedNote: Note | null = null;
+  protected selectedNote: Note | null = null;
+  protected isSearchMode = false;
 
   notes: Note[] = [
     {
@@ -39,6 +41,10 @@ export class NoteListComponent {
 
   selectNote(note: Note): void {
     this.selectedNote = note;
+  }
+
+  toggleSearchMode(): void {
+    this.isSearchMode = !this.isSearchMode;
   }
 
   /**
