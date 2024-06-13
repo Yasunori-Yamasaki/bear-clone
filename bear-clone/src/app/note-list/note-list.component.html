@@ -1,9 +1,13 @@
-<div>
-  <header>
-    <div>Notes</div>
-    <div>
-      <button><fa-icon [icon]="faPenToSquare" /></button>
-      <button><fa-icon [icon]="faMagnifyingGlass" /></button>
+<div class="solid h-[100vh] w-60 overflow-y-auto border-r border-zinc-300">
+  <header class="sticky top-0 flex items-center justify-between bg-white p-1">
+    <div class="p-2 font-bold">Notes</div>
+    <div class="flex gap-2 text-xl text-[#888889]">
+      <button class="h-8 w-9 rounded-md hover:bg-[#F3F5F7]">
+        <fa-icon [icon]="faPenToSquare" />
+      </button>
+      <button class="h-8 w-9 rounded-md hover:bg-[#F3F5F7]">
+        <fa-icon [icon]="faMagnifyingGlass" />
+      </button>
     </div>
   </header>
   <ul>
