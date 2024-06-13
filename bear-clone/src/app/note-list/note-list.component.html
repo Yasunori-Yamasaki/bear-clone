@@ -8,12 +8,17 @@
   >
     @if (isSearchMode) {
       <input
+        #searchBox
         type="text"
         class="solid w-full rounded-md border-4 border-[#F4BABA] pl-6 placeholder:text-sm focus:outline-none"
         placeholder="Search"
+        (input)="displayNoteList = search(searchBox.value)"
       />
       <fa-icon [icon]="faMagnifyingGlass" class="absolute left-4 text-sm text-[#888889]" />
-      <button class="absolute right-4 text-[#888889]" (click)="toggleSearchMode()">
+      <button
+        class="absolute right-4 text-[#888889]"
+        (click)="displayNoteList = notes; toggleSearchMode()"
+      >
         <fa-icon [icon]="faCircleXmark" />
       </button>
     } @else {
@@ -29,7 +34,7 @@
     }
   </header>
   <ul class="px-2">
-    @for (note of notes; track note) {
+    @for (note of displayNoteList; track note) {
       <li (click)="$event.stopPropagation(); selectNote(note)">
         <div
           class="grid gap-1 px-3 py-2"

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { faMagnifyingGlass, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -18,11 +18,12 @@ type Note = {
   imports: [FontAwesomeModule, CommonModule],
   templateUrl: "./note-list.component.html",
 })
-export class NoteListComponent {
+export class NoteListComponent implements OnInit {
   protected faMagnifyingGlass = faMagnifyingGlass;
   protected faPenToSquare = faPenToSquare;
   protected faCircleXmark = faCircleXmark;
 
+  protected displayNoteList: Note[] = [];
   protected selectedNote: Note | null = null;
   protected isSearchMode = false;
 
@@ -45,6 +46,14 @@ export class NoteListComponent {
 
   toggleSearchMode(): void {
     this.isSearchMode = !this.isSearchMode;
+  }
+
+  search(input: string): Note[] {
+    if (input === "") return this.notes;
+
+    return this.notes.filter(
+      ({ title, content }) => title.includes(input) || content.includes(input)
+    );
   }
 
   /**
@@ -79,5 +88,10 @@ export class NoteListComponent {
     }
 
     return baseDate.format("MMM D");
+  }
+
+  ngOnInit(): void {
+    // ToDo: 定数->取得データに変更する。
+    this.displayNoteList = this.notes;
   }
 }
