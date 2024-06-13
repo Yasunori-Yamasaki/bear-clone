@@ -5,6 +5,7 @@
   <header
     class="sticky top-0 flex h-12 items-center justify-between bg-white p-1"
     [ngClass]="{ 'relative px-2': isSearchMode }"
+    (click)="$event.stopPropagation()"
   >
     @if (isSearchMode) {
       <input
