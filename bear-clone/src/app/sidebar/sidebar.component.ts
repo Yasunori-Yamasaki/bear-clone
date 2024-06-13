@@ -81,12 +81,4 @@ export class SidebarComponent {
     { name: "bear", icon: faAngular, isOpen: false },
     { name: "tag", icon: faHashtag, isOpen: false },
   ];
-
-  /**
-   * 選択したカテゴリー名を保持する。
-   * @param categoryName 選択したカテゴリー名
-   */
-  onSelect(categoryName: string): void {
-    this.selectedCategory.set(categoryName);
-  }
 }

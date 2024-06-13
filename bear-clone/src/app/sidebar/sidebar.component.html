@@ -6,7 +6,7 @@
       [selectedCategory]="selectedCategory()"
       [wrapCategory]="wrapCategory"
       [level]="0"
-      (select)="onSelect($event)"
+      (select)="selectedCategory.set($event)"
     />
   }
 </nav>
