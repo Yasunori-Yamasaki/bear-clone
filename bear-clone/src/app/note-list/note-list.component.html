@@ -1,4 +1,7 @@
-<div class="solid h-[100vh] w-60 overflow-y-auto border-r border-zinc-300">
+<div
+  class="solid h-[100vh] w-60 overflow-y-auto border-r border-zinc-300"
+  (click)="selectedNote = null"
+>
   <header class="sticky top-0 flex items-center justify-between bg-white p-1">
     <div class="p-2 font-bold">Notes</div>
     <div class="flex gap-2 text-xl text-[#888889]">
@@ -11,23 +14,21 @@
     </div>
   </header>
   <ul class="px-2">
-    <li>
-      <div
-        class="soild grid gap-1 rounded-md border-l-[5px] border-[#FF4C43] bg-zinc-100 px-3 py-2"
-      >
-        <h1 class="text-sm font-bold">テストタイトル</h1>
-        <p class="text-sm text-[#888889]">テスト本文 これはテストですが、テストじゃない......</p>
-        <span class="text-xs text-[#888889]">Just now</span>
-      </div>
-    </li>
-    <li>
-      <div
-        class="after:solid relative grid gap-1 rounded-md px-3 py-2 after:absolute after:bottom-0 after:mx-3 after:w-11/12 after:border-b-2 after:border-zinc-200"
-      >
-        <h1 class="text-sm font-bold">テストタイトル2</h1>
-        <p class="text-sm text-[#888889]">テスト本文2 これは本番かと思いきや、テストだ......</p>
-        <span class="text-xs text-[#888889]">Jun 10</span>
-      </div>
-    </li>
+    @for (note of notes; track note) {
+      <li (click)="$event.stopPropagation(); selectNote(note)">
+        <div
+          class="grid gap-1 px-3 py-2"
+          [ngClass]="
+            note === selectedNote
+              ? 'soild rounded-md border-l-[5px] border-[#FF4C43] bg-zinc-100'
+              : 'after:solid relative after:absolute after:bottom-0 after:mx-3 after:w-11/12 after:border-b after:border-zinc-200'
+          "
+        >
+          <h1 class="text-sm font-bold">{{ note.title }}</h1>
+          <p class="text-sm text-[#888889]">{{ note.content }}</p>
+          <span class="text-xs text-[#888889]">{{ note.updatedAt }}</span>
+        </div>
+      </li>
+    }
   </ul>
 </div>
