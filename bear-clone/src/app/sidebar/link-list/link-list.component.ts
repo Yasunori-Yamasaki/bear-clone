@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, output } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
   faCalendar,
@@ -21,7 +21,7 @@ export class LinkListComponent {
   @Input() selectedCategory!: string;
   @Input() wrapCategory!: Category;
   @Input() level!: number;
-  @Output() select = new EventEmitter<string>();
+  select = output<string>();
 
   faAngleDown = faAngleDown;
   faAngleRight = faAngleRight;
