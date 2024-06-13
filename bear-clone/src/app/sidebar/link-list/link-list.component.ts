@@ -19,6 +19,7 @@ import { CommonModule } from "@angular/common";
 export class LinkListComponent {
   @Input() selectedCategory!: string;
   @Input() wrapCategory!: Category;
+  @Input() level!: number;
   @Output() select = new EventEmitter<string>();
 
   faAngleDown = faAngleDown;
@@ -30,6 +31,17 @@ export class LinkListComponent {
   faSquareCheck = faSquareCheck;
 
   isOpen = false;
+
+  /**
+   * 階層構造のグループ表示用スタイリングのプロパティ値計算処理
+   * @param level 階層(入れ子)段階
+   * @returns padding-leftの適用値
+   */
+  calcPaddingLeft(level: number): string {
+    const basePadding = 2;
+
+    return `${basePadding + level}rem`;
+  }
 
   /**
    * 下層カテゴリの表示フラグ切り替え処理

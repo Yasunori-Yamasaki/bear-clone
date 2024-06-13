@@ -1,6 +1,7 @@
 <div
-  class="select-none py-0.5 pl-8"
+  class="select-none py-0.5"
   [ngClass]="{ 'rounded-md bg-[#FF4C43]': selectedCategory === wrapCategory.name }"
+  [ngStyle]="{ 'padding-left': calcPaddingLeft(level) }"
   (click)="selectCategory(wrapCategory.name)"
 >
   <div class="relative flex gap-3">
@@ -31,6 +32,7 @@
         <app-link-list
           [selectedCategory]="selectedCategory"
           [wrapCategory]="category"
+          [level]="level + 1"
           (select)="selectCategory($event)"
         />
       </li>
