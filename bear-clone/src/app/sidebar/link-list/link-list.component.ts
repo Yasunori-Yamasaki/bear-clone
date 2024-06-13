@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
   faCalendar,
@@ -13,6 +13,7 @@ import { CommonModule } from "@angular/common";
 @Component({
   selector: "app-link-list",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FontAwesomeModule, CommonModule],
   templateUrl: "./link-list.component.html",
 })

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, signal } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
   IconDefinition,
@@ -22,6 +22,7 @@ export type Category = {
 @Component({
   selector: "app-sidebar",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FontAwesomeModule, LinkListComponent],
   templateUrl: "./sidebar.component.html",
 })
@@ -37,7 +38,7 @@ export class SidebarComponent {
   faSquareCheck = faSquareCheck;
   faTrashCan = faTrashCan;
 
-  selectedCategory = "Notes";
+  selectedCategory = signal("Notes");
 
   // ToDo: データ格納場所を変更 & タグカテゴリー分はデータ取得するように修正。
 
@@ -86,6 +87,6 @@ export class SidebarComponent {
    * @param categoryName 選択したカテゴリー名
    */
   onSelect(categoryName: string): void {
-    this.selectedCategory = categoryName;
+    this.selectedCategory.set(categoryName);
   }
 }

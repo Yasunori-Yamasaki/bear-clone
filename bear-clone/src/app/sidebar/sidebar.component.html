@@ -3,7 +3,7 @@
 >
   @for (wrapCategory of wrapCategories; track wrapCategory) {
     <app-link-list
-      [selectedCategory]="selectedCategory"
+      [selectedCategory]="selectedCategory()"
       [wrapCategory]="wrapCategory"
       [level]="0"
       (select)="onSelect($event)"
