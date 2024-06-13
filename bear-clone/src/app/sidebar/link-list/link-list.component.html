@@ -10,15 +10,13 @@
         <fa-icon
           class="absolute -left-6"
           [icon]="faAngleDown"
-          (click)="toggleOpenCategory(wrapCategory, false)"
-          (click)="disableToggle($event)"
+          (click)="toggleOpenCategory(wrapCategory, false, $event)"
         />
       } @else {
         <fa-icon
           class="absolute -left-6"
           [icon]="faAngleRight"
-          (click)="toggleOpenCategory(wrapCategory, true)"
-          (click)="disableToggle($event)"
+          (click)="toggleOpenCategory(wrapCategory, true, $event)"
         />
       }
     }

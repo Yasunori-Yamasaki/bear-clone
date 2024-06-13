@@ -48,8 +48,11 @@ export class LinkListComponent {
    * @param category 選択したカテゴリオブジェクト
    * @param bool トグル開閉の真偽値
    */
-  toggleOpenCategory(category: Category, bool: boolean): void {
+  toggleOpenCategory(category: Category, bool: boolean, event: Event): void {
     category.isOpen = bool;
+
+    // トグルボタンを押した場合は、カテゴリ選択処理(selectCategory)を発火させない。
+    event.stopPropagation();
   }
 
   /**
@@ -58,12 +61,5 @@ export class LinkListComponent {
    */
   selectCategory(categoryName: string): void {
     this.select.emit(categoryName);
-  }
-
-  /**
-   * トグルボタンを押しても選択状態にならないようにするための処理
-   */
-  disableToggle(event: Event): void {
-    event.stopPropagation();
   }
 }
