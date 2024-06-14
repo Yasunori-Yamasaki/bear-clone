@@ -8,6 +8,9 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FontAwesomeModule],
   templateUrl: "./search-box.component.html",
+  host: {
+    class: "sticky top-0 flex h-12 items-center justify-between bg-white py-1 px-2",
+  },
 })
 export class SearchBoxComponent {
   toggle = output();

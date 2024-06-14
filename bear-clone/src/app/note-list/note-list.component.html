@@ -4,14 +4,10 @@
 >
   <header
     class="sticky top-0 flex h-12 items-center justify-between bg-white p-1"
-    [ngClass]="{ 'relative px-2': isSearchMode }"
     (click)="$event.stopPropagation()"
   >
     @if (isSearchMode) {
-      <app-search-box
-        (toggle)="toggleSearchMode()"
-        (search)="search($event)"
-      />
+      <app-search-box (toggle)="toggleSearchMode()" (search)="search($event)" />
     } @else {
       <div class="p-2 font-bold">Notes</div>
       <div class="flex gap-2 text-xl text-[#888889]">
