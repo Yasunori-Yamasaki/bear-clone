@@ -1,6 +1,4 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from "@angular/core";
-import { faMagnifyingGlass, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CommonModule } from "@angular/common";
 import { Store } from "@ngrx/store";
@@ -8,12 +6,7 @@ import { selectAllPublicNotes } from "../shared/selectors/note.selectors";
 import { SearchBoxComponent } from "./search-box/search-box.component";
 import { CreateAndSearchBtnComponent } from "../create-and-search-btn/create-and-search-btn.component";
 import { NoteItemComponent } from "./note-item/note-item.component";
-
-type Note = {
-  title: string;
-  content: string;
-  updatedAt: string;
-};
+import { Note } from "../shared/models/note.model";
 
 @Component({
   selector: "app-note-list",
@@ -29,10 +22,6 @@ type Note = {
   templateUrl: "./note-list.component.html",
 })
 export class NoteListComponent {
-  protected faMagnifyingGlass = faMagnifyingGlass;
-  protected faPenToSquare = faPenToSquare;
-  protected faCircleXmark = faCircleXmark;
-
   protected selectedNote: Note | null = null;
   protected isSearchMode = false;
 
