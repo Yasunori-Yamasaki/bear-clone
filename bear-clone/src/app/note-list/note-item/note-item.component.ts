@@ -11,8 +11,8 @@ import dayjs from "dayjs";
   templateUrl: "./note-item.component.html",
 })
 export class NoteItemComponent {
-  @Input() isSelected!: boolean;
-  @Input() note!: Note;
+  @Input({ required: true }) isSelected!: boolean;
+  @Input({ required: true }) note!: Note;
 
   /**
    * メモの更新日時を現在との時間差によって下記にフォーマットする。
