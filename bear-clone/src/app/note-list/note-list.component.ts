@@ -5,7 +5,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CommonModule } from "@angular/common";
 import dayjs from "dayjs";
 import { Store } from "@ngrx/store";
-import { selectAllNotes } from "../shared/selectors/note.selectors";
+import { selectAllPublicNotes } from "../shared/selectors/note.selectors";
 
 type Note = {
   title: string;
@@ -29,7 +29,7 @@ export class NoteListComponent {
   protected selectedNote: Note | null = null;
   protected isSearchMode = false;
 
-  protected notes = this.store.selectSignal(selectAllNotes);
+  protected notes = this.store.selectSignal(selectAllPublicNotes);
   protected inputVal = signal("");
   /**
    * メモ一覧のフィルタリング処理
