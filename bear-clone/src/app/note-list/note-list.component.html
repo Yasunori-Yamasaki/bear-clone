@@ -4,7 +4,10 @@
 >
   <header (click)="$event.stopPropagation()">
     @if (isSearchMode()) {
-      <app-search-box (toggle)="isSearchMode.set(!isSearchMode())" (search)="inputVal.set($event)" />
+      <app-search-box
+        (toggle)="isSearchMode.set(!isSearchMode())"
+        (search)="inputVal.set($event)"
+      />
     } @else {
       <app-create-and-search-btn (toggle)="isSearchMode.set(!isSearchMode())" />
     }
