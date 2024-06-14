@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, computed, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, computed, signal } from "@angular/core";
 import { faMagnifyingGlass, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -25,7 +25,6 @@ export class NoteListComponent {
   protected faPenToSquare = faPenToSquare;
   protected faCircleXmark = faCircleXmark;
 
-  protected displayNoteList: Note[] = [];
   protected selectedNote: Note | null = null;
   protected isSearchMode = false;
 
