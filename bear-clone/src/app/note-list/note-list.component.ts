@@ -22,15 +22,12 @@ import { Note } from "../shared/models/note.model";
   templateUrl: "./note-list.component.html",
 })
 export class NoteListComponent {
-  protected selectedNote: Note | null = null;
-  protected isSearchMode = false;
-
+  protected selectedNote = signal<Note | null>(null);
+  protected isSearchMode = signal(false);
   protected notes = this.store.selectSignal(selectAllPublicNotes);
   protected inputVal = signal("");
   /**
    * メモ一覧のフィルタリング処理
-   * ※前提処理は search
-   * @see {@link search}
    */
   protected filteredNotes = computed(() => {
     if (this.inputVal() === "") return this.notes();
@@ -41,29 +38,4 @@ export class NoteListComponent {
   });
 
   constructor(private store: Store) {}
-
-  /**
-   * 選択したメモデータの保持処理
-   * @param note 選択済みメモデータ
-   */
-  selectNote(note: Note): void {
-    this.selectedNote = note;
-  }
-
-  /**
-   * 検索窓の表示フラグの切り替え処理
-   */
-  toggleSearchMode(): void {
-    this.isSearchMode = !this.isSearchMode;
-  }
-
-  /**
-   * 選択カテゴリ内の語句による特定メモ検索処理
-   * ※ 後続処理は filteredNotes
-   * @param input 検索語句
-   * @see {@link filteredNotes}
-   */
-  search(input: string): void {
-    this.inputVal.set(input);
-  }
 }
