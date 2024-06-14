@@ -8,5 +8,8 @@ import { NoteListComponent } from "./note-list/note-list.component";
   standalone: true,
   imports: [RouterOutlet, SidebarComponent, NoteListComponent],
   templateUrl: "./app.component.html",
+  host: {
+    class: "flex",
+  },
 })
 export class AppComponent {}
