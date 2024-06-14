@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { Store } from "@ngrx/store";
 import { selectAllPublicNotes } from "../shared/selectors/note.selectors";
 import { SearchBoxComponent } from "./search-box/search-box.component";
+import { CreateAndSearchBtnComponent } from "../create-and-search-btn/create-and-search-btn.component";
 
 type Note = {
   title: string;
@@ -18,7 +19,7 @@ type Note = {
   selector: "app-note-list",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FontAwesomeModule, CommonModule, SearchBoxComponent],
+  imports: [FontAwesomeModule, CommonModule, SearchBoxComponent, CreateAndSearchBtnComponent],
   templateUrl: "./note-list.component.html",
 })
 export class NoteListComponent {
