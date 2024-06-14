@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, computed, signal } from "@angular/core";
 import { faMagnifyingGlass, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CommonModule } from "@angular/common";
 import dayjs from "dayjs";
+import { Store } from "@ngrx/store";
+import { selectAllNotes } from "../shared/selectors/note.selectors";
 
 type Note = {
   title: string;
@@ -18,7 +20,7 @@ type Note = {
   imports: [FontAwesomeModule, CommonModule],
   templateUrl: "./note-list.component.html",
 })
-export class NoteListComponent implements OnInit {
+export class NoteListComponent {
   protected faMagnifyingGlass = faMagnifyingGlass;
   protected faPenToSquare = faPenToSquare;
   protected faCircleXmark = faCircleXmark;
@@ -27,18 +29,17 @@ export class NoteListComponent implements OnInit {
   protected selectedNote: Note | null = null;
   protected isSearchMode = false;
 
-  notes: Note[] = [
-    {
-      title: "テストタイトル",
-      content: "テスト本文 これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。",
-      updatedAt: "2024-06-13 10:42:00",
-    },
-    {
-      title: "テストタイトル2",
-      content: "テスト本文2 これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。",
-      updatedAt: "2024-06-10 00:00:00",
-    },
-  ];
+  protected notes = this.store.selectSignal(selectAllNotes);
+  protected inputVal = signal("");
+  protected filteredNotes = computed(() => {
+    if (this.inputVal() === "") return this.notes();
+
+    return this.notes().filter(
+      ({ title, content }) => title.includes(this.inputVal()) || content.includes(this.inputVal())
+    );
+  });
+
+  constructor(private store: Store) {}
 
   selectNote(note: Note): void {
     this.selectedNote = note;
@@ -48,12 +49,8 @@ export class NoteListComponent implements OnInit {
     this.isSearchMode = !this.isSearchMode;
   }
 
-  search(input: string): Note[] {
-    if (input === "") return this.notes;
-
-    return this.notes.filter(
-      ({ title, content }) => title.includes(input) || content.includes(input)
-    );
+  search(input: string): void {
+    this.inputVal.set(input);
   }
 
   /**
@@ -88,10 +85,5 @@ export class NoteListComponent implements OnInit {
     }
 
     return baseDate.format("MMM D");
-  }
-
-  ngOnInit(): void {
-    // ToDo: 定数->取得データに変更する。
-    this.displayNoteList = this.notes;
   }
 }
