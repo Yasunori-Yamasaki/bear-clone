@@ -6,6 +6,7 @@ import { CommonModule } from "@angular/common";
 import dayjs from "dayjs";
 import { Store } from "@ngrx/store";
 import { selectAllPublicNotes } from "../shared/selectors/note.selectors";
+import { SearchBoxComponent } from "./search-box/search-box.component";
 
 type Note = {
   title: string;
@@ -17,7 +18,7 @@ type Note = {
   selector: "app-note-list",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FontAwesomeModule, CommonModule],
+  imports: [FontAwesomeModule, CommonModule, SearchBoxComponent],
   templateUrl: "./note-list.component.html",
 })
 export class NoteListComponent {
