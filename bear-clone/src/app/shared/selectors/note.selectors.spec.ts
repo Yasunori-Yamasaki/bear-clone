@@ -1,7 +1,5 @@
+describe("Note Selectors", () => {
+  it("『selectAllPublicNotes』はTrashはisDeletedがfalseのデータのみ取得できる。", () => {});
 
-
-describe('Note Selectors', () => {
-  it('should select the feature state', () => {
-    
-  });
+  it("『selectAllDeletedNotes』はTrashはisDeletedがtrueのデータのみ取得できる。", () => {});
 });

@@ -19,4 +19,6 @@ describe("NoteListComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
+
+  it("メモデータがリストの数だけ表示されている。", () => {});
 });
