@@ -10,7 +10,7 @@ import { EditorComponent } from "./editor/editor.component";
   imports: [RouterOutlet, SidebarComponent, NoteListComponent, EditorComponent],
   templateUrl: "./app.component.html",
   host: {
-    class: "flex",
+    class: "grid grid-cols-root",
   },
 })
 export class AppComponent {}
