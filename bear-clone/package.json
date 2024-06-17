@@ -31,6 +31,8 @@
     "@ngrx/store": "^17.2.0",
     "@ngrx/store-devtools": "^17.2.0",
     "dayjs": "^1.11.11",
+    "ngx-quill": "^25.3.2",
+    "quill": "^2.0.2",
     "rxjs": "~7.8.0",
     "tailwind-variants": "^0.2.1",
     "tslib": "^2.3.0",
