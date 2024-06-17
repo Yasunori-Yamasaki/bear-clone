@@ -6,18 +6,13 @@ import { QuillModule, QuillModules } from "ngx-quill";
   standalone: true,
   imports: [QuillModule],
   templateUrl: "./editor.component.html",
+  host: {
+    class: "relative",
+  },
 })
 export class EditorComponent {
   protected modules: QuillModules = {
-    toolbar: {
-      container: [
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-        [{ list: "ordered" }, { list: "bullet" }],
-        ["bold", "italic", "underline", "strike"],
-        ["link", "image"],
-        ["blockquote", "code-block"],
-      ],
-    },
+    toolbar: "#toolbar",
   };
   protected placeholder = "";
 }
