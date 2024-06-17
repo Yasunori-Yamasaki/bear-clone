@@ -33,7 +33,10 @@
         "eslint.format.enable": true,
         "[typescriptreact]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
-        }
+        },
+        "tailwindCSS.experimental.classRegex": [
+          "class\\:\\s*[\"'`]([^\"'`]*).*?[\"'`]"
+        ]
       }
     }
   }
