@@ -5,7 +5,7 @@
   <header (click)="$event.stopPropagation()">
     @if (isSearchMode()) {
       <app-search-box
-        (toggle)="isSearchMode.set(!isSearchMode())"
+        (toggle)="isSearchMode.set(!isSearchMode()); inputVal.set('')"
         (search)="inputVal.set($event)"
       />
     } @else {
