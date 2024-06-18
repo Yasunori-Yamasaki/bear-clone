@@ -6,7 +6,9 @@
       : 'after:solid relative after:absolute after:bottom-0 after:mx-3 after:w-11/12 after:border-b after:border-zinc-200'
   "
 >
-  <h1 class="text-sm font-bold">{{ note.title }}</h1>
-  <p class="line-clamp-2 text-sm text-[#888889]">{{ note.content }}</p>
+  <h1 class="text-sm font-bold">{{ note.title === "" ? "A wonderful new note" : note.title }}</h1>
+  <p class="line-clamp-2 text-sm text-[#888889]">
+    {{ note.title === "" ? "Keep calm and write something" : note.content }}
+  </p>
   <span class="text-xs text-[#888889]">{{ note.updatedAt | formatDate }}</span>
 </div>
