@@ -1,4 +1,4 @@
-import { Component, Input, output } from "@angular/core";
+import { Component, Input, OnInit, output } from "@angular/core";
 import { ContentChange, QuillModule, QuillModules } from "ngx-quill";
 import { Note } from "../shared/models/note.model";
 import { FormsModule } from "@angular/forms";
@@ -12,12 +12,16 @@ import { FormsModule } from "@angular/forms";
     class: "relative",
   },
 })
-export class EditorComponent {
+export class EditorComponent implements OnInit {
   @Input({ required: true }) note!: Note | null;
   protected contentChange = output<ContentChange>();
 
   protected modules: QuillModules = {
     toolbar: "#toolbar",
   };
-  protected htmlText = this.note?.htmlText;
+  protected htmlText = "";
+
+  ngOnInit(): void {
+    this.htmlText = this.note!.htmlText;
+  }
 }
