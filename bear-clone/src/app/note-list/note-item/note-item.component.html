@@ -10,5 +10,10 @@
   <p class="line-clamp-2 text-sm text-[#888889]">
     {{ note.title === "" ? "Keep calm and write something" : note.content }}
   </p>
-  <span class="text-xs text-[#888889]">{{ note.updatedAt | formatDate }}</span>
+  <div class="flex justify-between text-xs text-[#888889]">
+    <span>{{ note.updatedAt | formatDate }}</span>
+    <button (click)="trash.emit(note.id)">
+      <fa-icon [icon]="faTrashCan" />
+    </button>
+  </div>
 </div>

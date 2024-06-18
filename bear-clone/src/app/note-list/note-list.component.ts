@@ -46,10 +46,10 @@ export class NoteListComponent {
    */
   add(): void {
     const noteLength = this.notes().length;
-    const latestId = parseInt(this.notes().reverse()[0].id);
+    const latestId = !noteLength ? 1 : parseInt(this.notes().reverse()[0].id) + 1;
     const now = dayjs();
     const newNote = {
-      id: String(latestId + 1),
+      id: latestId.toString(),
       title: "",
       content: "",
       tags: [],
@@ -59,5 +59,13 @@ export class NoteListComponent {
 
     this.store.dispatch(NoteActions.addNotes(newNote));
     this.selectedNote.set(this.notes()[noteLength]);
+  }
+
+  /**
+   * Storeから該当メモを削除
+   * @param noteId 削除対象メモID
+   */
+  remove(noteId: string): void {
+    this.store.dispatch(NoteActions.removeNotes({ noteId }));
   }
 }

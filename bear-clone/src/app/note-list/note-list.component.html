@@ -15,7 +15,7 @@
   <ul class="px-2">
     @for (note of filteredNotes(); track note) {
       <li (click)="$event.stopPropagation(); selectedNote.set(note)">
-        <app-note-item [isSelected]="note === selectedNote()" [note]="note" />
+        <app-note-item [isSelected]="note === selectedNote()" [note]="note" (trash)="remove($event)" />
       </li>
     }
   </ul>
