@@ -23,18 +23,22 @@ export class AppComponent {
 
   constructor(private store: Store) {}
 
-  contentSave({ html, text }: ContentChange): void {
+  contentSave(event: ContentChange): void {
     const note = this.selectedNote();
     if (!note) return;
 
-    const newNote: Note = {
-      ...note,
+    const newNote: Note = this.setNewNote(note, event);
+
+    this.store.dispatch(NoteActions.updateNotes({ newNote }));
+  }
+
+  setNewNote(oldNote: Note, { html, text }: ContentChange): Note {
+    return {
+      ...oldNote,
       title: text.split("\n")[0],
-      content: text,
+      content: text.split("\n").slice(1).join(""),
       htmlText: html ?? "",
       updatedAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
     };
-
-    this.store.dispatch(NoteActions.updateNotes({ newNote }));
   }
 }
