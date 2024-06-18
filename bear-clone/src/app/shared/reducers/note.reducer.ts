@@ -40,16 +40,11 @@ export const noteReducer = createReducer(
     localStorageService.save(newNotes);
     return newNotes;
   }),
-  on(NoteActions.updateNotes, (state, { newNote: { id, title, content, htmlText } }) => {
+  on(NoteActions.updateNotes, (state, { newNote }) => {
     const newNotes = state.map((note) => {
-      if (id !== note.id) return note;
+      if (newNote.id !== note.id) return note;
 
-      return {
-        ...note,
-        title,
-        content,
-        htmlText,
-      };
+      return newNote;
     });
 
     localStorageService.save(newNotes);

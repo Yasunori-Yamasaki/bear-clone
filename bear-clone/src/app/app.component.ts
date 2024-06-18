@@ -7,6 +7,7 @@ import { Note } from "./shared/models/note.model";
 import { ContentChange } from "ngx-quill";
 import { Store } from "@ngrx/store";
 import { NoteActions } from "./shared/actions/note.actions";
+import dayjs from "dayjs";
 
 @Component({
   selector: "app-root",
@@ -28,9 +29,10 @@ export class AppComponent {
 
     const newNote: Note = {
       ...note,
-      title: text,
+      title: text.split("\n")[0],
       content: text,
       htmlText: html ?? "",
+      updatedAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
     };
 
     this.store.dispatch(NoteActions.updateNotes({ newNote }));
