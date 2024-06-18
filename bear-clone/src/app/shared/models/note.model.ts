@@ -4,6 +4,7 @@ export interface Note {
   id: string;
   title: string;
   content: string;
+  htmlText: string;
   tags: string[];
   updatedAt: string;
   isDeleted: boolean;
