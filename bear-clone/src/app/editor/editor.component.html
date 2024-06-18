@@ -3,7 +3,7 @@
   placeholder=""
   [ngModel]="note!.htmlText"
   [modules]="modules"
-  (onContentChanged)="contentChange.emit($event)"
+  (onContentChanged)="update($event)"
 />
 <div
   id="toolbar"

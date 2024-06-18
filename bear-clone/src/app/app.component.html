@@ -3,5 +3,5 @@
 @if (!selectedNote()) {
   <p class="flex items-center justify-center text-3xl text-[#888889]">メモ未選択</p>
 } @else {
-  <app-editor [note]="selectedNote()" (contentChange)="contentSave($event)" />
+  <app-editor [note]="selectedNote()" />
 }
