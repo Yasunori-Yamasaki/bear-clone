@@ -22,6 +22,8 @@ export class FormatDatePipe implements PipeTransform {
     const oneHourAgo = now.subtract(1, "hour");
     const oneDayAgo = now.subtract(1, "day");
 
+    if (baseDate.isSame(now, "second")) return "Just now";
+
     if (baseDate.isAfter(oneMinuteAgo) && baseDate.isBefore(now)) {
       const diffSec = now.diff(baseDate, "second");
       return `${diffSec} seconds ago`;
