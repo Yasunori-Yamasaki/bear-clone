@@ -9,7 +9,7 @@
         (search)="inputVal.set($event)"
       />
     } @else {
-      <app-create-and-search-btn (toggle)="isSearchMode.set(!isSearchMode())" />
+      <app-create-and-search-btn (create)="add()" (toggle)="isSearchMode.set(!isSearchMode())" />
     }
   </header>
   <ul class="px-2">

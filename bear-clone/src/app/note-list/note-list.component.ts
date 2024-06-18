@@ -7,6 +7,8 @@ import { SearchBoxComponent } from "./search-box/search-box.component";
 import { CreateAndSearchBtnComponent } from "../create-and-search-btn/create-and-search-btn.component";
 import { NoteItemComponent } from "./note-item/note-item.component";
 import { Note } from "../shared/models/note.model";
+import { NoteActions } from "../shared/actions/note.actions";
+import dayjs from "dayjs";
 
 @Component({
   selector: "app-note-list",
@@ -38,4 +40,19 @@ export class NoteListComponent {
   });
 
   constructor(private store: Store) {}
+
+  add(): void {
+    const latestId = parseInt(this.notes().reverse()[0].id);
+    const now = dayjs();
+    const newNote = {
+      id: String(latestId + 1),
+      title: "",
+      content: "",
+      tags: [],
+      updatedAt: now.format("YYYY-MM-DD HH:mm:ss"),
+      isDeleted: false,
+    };
+
+    this.store.dispatch(NoteActions.addNotes(newNote));
+  }
 }
