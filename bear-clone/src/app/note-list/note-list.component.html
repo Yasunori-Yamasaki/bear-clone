@@ -1,6 +1,6 @@
 <div
   class="solid h-[100vh] w-60 overflow-y-auto border-r border-zinc-300"
-  (click)="selectedNote.set(null)"
+  (click)="select.emit(null)"
 >
   <header (click)="$event.stopPropagation()">
     @if (isSearchMode()) {
@@ -14,8 +14,12 @@
   </header>
   <ul class="px-2">
     @for (note of filteredNotes(); track note) {
-      <li (click)="$event.stopPropagation(); selectedNote.set(note)">
-        <app-note-item [isSelected]="note === selectedNote()" [note]="note" (trash)="remove($event)" />
+      <li (click)="$event.stopPropagation(); select.emit(note)">
+        <app-note-item
+          [isSelected]="note.id === selectedNote?.id"
+          [note]="note"
+          (trash)="remove($event)"
+        />
       </li>
     }
   </ul>
