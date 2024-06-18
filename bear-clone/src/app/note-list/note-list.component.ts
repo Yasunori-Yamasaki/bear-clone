@@ -8,7 +8,6 @@ import { CreateAndSearchBtnComponent } from "../create-and-search-btn/create-and
 import { NoteItemComponent } from "./note-item/note-item.component";
 import { Note } from "../shared/models/note.model";
 import { NoteActions } from "../shared/actions/note.actions";
-import dayjs from "dayjs";
 
 @Component({
   selector: "app-note-list",
@@ -45,20 +44,8 @@ export class NoteListComponent {
    * Storeに新規メモを追加 ＆ 新規メモを選択状態にする
    */
   add(): void {
-    const noteLength = this.notes().length;
-    const latestId = !noteLength ? 1 : parseInt(this.notes().reverse()[0].id) + 1;
-    const now = dayjs();
-    const newNote = {
-      id: latestId.toString(),
-      title: "",
-      content: "",
-      tags: [],
-      updatedAt: now.format("YYYY-MM-DD HH:mm:ss"),
-      isDeleted: false,
-    };
-
-    this.store.dispatch(NoteActions.addNotes(newNote));
-    this.selectedNote.set(this.notes()[noteLength]);
+    this.store.dispatch(NoteActions.addNotes());
+    this.selectedNote.set(this.notes()[this.notes().length - 1]);
   }
 
   /**
