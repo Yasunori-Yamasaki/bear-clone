@@ -2,11 +2,14 @@ import { createReducer, on } from "@ngrx/store";
 import { initialState } from "../models/note.model";
 import { NoteActions } from "../actions/note.actions";
 import dayjs from "dayjs";
+import { LocalStorageService } from "../services/local-storage.service";
+
+const localStorageService = new LocalStorageService();
 
 export const noteFeatureKey = "note";
 
 export const noteReducer = createReducer(
-  initialState,
+  initialState(),
   on(NoteActions.addNotes, (state) => {
     const latestId = !state.length ? 1 : parseInt(state[state.length - 1].id) + 1;
     const now = dayjs();
@@ -18,17 +21,22 @@ export const noteReducer = createReducer(
       updatedAt: now.format("YYYY-MM-DD HH:mm:ss"),
       isDeleted: false,
     };
+    const newNotes = [...state, newNote];
 
-    return [...state, newNote];
+    localStorageService.save(newNotes);
+    return newNotes;
   }),
-  on(NoteActions.removeNotes, (state, { noteId }) =>
-    state.map((note) => {
+  on(NoteActions.removeNotes, (state, { noteId }) => {
+    const newNotes = state.map((note) => {
       if (note.id !== noteId) return note;
 
       return {
         ...note,
         isDeleted: true,
       };
-    })
-  )
+    });
+
+    localStorageService.save(newNotes);
+    return newNotes;
+  })
 );
