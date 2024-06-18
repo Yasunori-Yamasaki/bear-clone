@@ -18,9 +18,9 @@ import { CommonModule } from "@angular/common";
   templateUrl: "./link-list.component.html",
 })
 export class LinkListComponent {
-  @Input({ required: true })() selectedCategory!: string;
-  @Input({ required: true })() wrapCategory!: Category;
-  @Input({ required: true })() level!: number;
+  @Input({ required: true }) selectedCategory!: string;
+  @Input({ required: true }) wrapCategory!: Category;
+  @Input({ required: true }) level!: number;
   select = output<string>();
 
   faAngleDown = faAngleDown;
