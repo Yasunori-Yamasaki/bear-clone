@@ -41,7 +41,11 @@ export class NoteListComponent {
 
   constructor(private store: Store) {}
 
+  /**
+   * Storeに新規メモを追加 ＆ 新規メモを選択状態にする
+   */
   add(): void {
+    const noteLength = this.notes().length;
     const latestId = parseInt(this.notes().reverse()[0].id);
     const now = dayjs();
     const newNote = {
@@ -54,5 +58,6 @@ export class NoteListComponent {
     };
 
     this.store.dispatch(NoteActions.addNotes(newNote));
+    this.selectedNote.set(this.notes()[noteLength]);
   }
 }
