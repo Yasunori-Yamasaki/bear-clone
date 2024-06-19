@@ -8,5 +8,5 @@ export const noteReducer = createReducer(
   initialState(),
   on(NoteActions.addNotesSuccess, (_, { newNotes }) => newNotes),
   on(NoteActions.removeNotesSuccess, (_, { newNotes }) => newNotes),
-  on(NoteActions.updateNotes, (_, { newNotes }) => newNotes)
+  on(NoteActions.updateNotesSuccess, (_, { newNotes }) => newNotes)
 );

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Note } from "../models/note.model";
 import dayjs from "dayjs";
+import { ContentChange } from "ngx-quill";
 
 @Injectable({
   providedIn: "root",
@@ -52,6 +53,24 @@ export class LocalStorageService {
       return {
         ...note,
         isDeleted: true,
+      };
+    });
+
+    this.save(newNotes);
+    return newNotes;
+  }
+
+  updateNote(noteId: Note["id"], html: ContentChange["html"], text: ContentChange["text"]): Note[] {
+    const allNotes = this.get();
+    const newNotes = allNotes.map((note) => {
+      if (note.id !== noteId) return note;
+
+      return {
+        ...note,
+        title: text.split("\n")[0],
+        content: text.split("\n").slice(1).join(""),
+        htmlText: html ?? "",
+        updatedAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
       };
     });
 
