@@ -18,7 +18,6 @@ import { selectAllNotes } from "../shared/selectors/note.selectors";
 })
 export class EditorComponent {
   @Input({ required: true }) note!: Note | null;
-  protected contentChange = output<ContentChange>();
 
   protected modules: QuillModules = {
     toolbar: "#toolbar",
@@ -34,7 +33,7 @@ export class EditorComponent {
     if (!this.note) return;
 
     const newNote = this.setNewNote(this.note, event);
-    const allNotes = this.store.selectSignal(selectAllNotes)
+    const allNotes = this.store.selectSignal(selectAllNotes);
     const newNotes = allNotes().map((note) => {
       if (newNote.id !== note.id) return note;
 
