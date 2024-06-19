@@ -10,23 +10,7 @@ export const noteFeatureKey = "note";
 
 export const noteReducer = createReducer(
   initialState(),
-  on(NoteActions.addNotes, (state) => {
-    const latestId = !state.length ? 1 : parseInt(state[state.length - 1].id) + 1;
-    const now = dayjs();
-    const newNote: Note = {
-      id: latestId.toString(),
-      title: "",
-      content: "",
-      htmlText: "",
-      tags: [],
-      updatedAt: now.format("YYYY-MM-DD HH:mm:ss"),
-      isDeleted: false,
-    };
-    const newNotes = [...state, newNote];
-
-    localStorageService.save(newNotes);
-    return newNotes;
-  }),
+  on(NoteActions.addNotes, (_, { newNotes }) => newNotes),
   on(NoteActions.removeNotes, (state, { noteId }) => {
     const newNotes = state.map((note) => {
       if (note.id !== noteId) return note;

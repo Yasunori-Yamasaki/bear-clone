@@ -5,7 +5,7 @@ import { ContentChange } from "ngx-quill";
 export const NoteActions = createActionGroup({
   source: "Note",
   events: {
-    "Add Notes": emptyProps(),
+    "Add Notes": props<{ newNotes: Note[] }>(),
     "Remove Notes": props<{ noteId: string }>(),
     "Update Notes": props<{ newNote: Note }>(),
   },
