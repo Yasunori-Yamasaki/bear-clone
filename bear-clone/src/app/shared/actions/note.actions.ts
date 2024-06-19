@@ -3,7 +3,7 @@ import { Note } from "../models/note.model";
 import { ContentChange } from "ngx-quill";
 
 export const NoteActions = createActionGroup({
-  source: "Note",
+  source: "Note Local Storage",
   events: {
     "Add Notes": props<{ newNotes: Note[] }>(),
     "Remove Notes": props<{ newNotes: Note[] }>(),
