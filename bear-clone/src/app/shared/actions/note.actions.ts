@@ -7,7 +7,8 @@ export const NoteActions = createActionGroup({
   events: {
     "Add Notes": emptyProps(),
     "Add Notes Success": props<{ newNotes: Note[] }>(),
-    "Remove Notes": props<{ newNotes: Note[] }>(),
+    "Remove Notes": props<{ noteId: string }>(),
+    "Remove Notes Success": props<{ newNotes: Note[] }>(),
     "Update Notes": props<{ newNotes: Note[] }>(),
   },
 });

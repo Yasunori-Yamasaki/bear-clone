@@ -14,7 +14,7 @@ export class NoteEffects {
   localStorage$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(NoteActions.removeNotes, NoteActions.updateNotes),
+        ofType(NoteActions.updateNotes),
         tap(({ newNotes }) => {
           this.localStorageService.save(newNotes);
         })
@@ -28,6 +28,17 @@ export class NoteEffects {
       switchMap(() => {
         return of(this.localStorageService.createNote()).pipe(
           map((newNotes) => NoteActions.addNotesSuccess({ newNotes }))
+        );
+      })
+    )
+  );
+
+  removeLocalStorage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NoteActions.removeNotes),
+      switchMap(({ noteId }) => {
+        return of(this.localStorageService.deleteNote(noteId)).pipe(
+          map((newNotes) => NoteActions.removeNotesSuccess({ newNotes }))
         );
       })
     )

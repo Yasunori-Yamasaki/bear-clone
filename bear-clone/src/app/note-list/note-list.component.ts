@@ -58,15 +58,7 @@ export class NoteListComponent {
    * @param noteId 削除対象メモID
    */
   remove(noteId: string): void {
-    const newNotes = this.allNotes().map((note) => {
-      if (note.id !== noteId) return note;
-
-      return {
-        ...note,
-        isDeleted: true,
-      };
-    });
-    this.store.dispatch(NoteActions.removeNotes({ newNotes }));
+    this.store.dispatch(NoteActions.removeNotes({ noteId }));
 
     if (noteId === this.selectedNote?.id) {
       this.select.emit(null);

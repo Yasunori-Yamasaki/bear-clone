@@ -40,6 +40,25 @@ export class LocalStorageService {
     return newNotes;
   }
 
+  /**
+   * 該当メモの削除処理
+   * - 論理削除
+   * @param noteId 削除対象メモID
+   */
+  deleteNote(noteId: string): Note[] {
+    const newNotes = this.get().map((note) => {
+      if (note.id !== noteId) return note;
+
+      return {
+        ...note,
+        isDeleted: true,
+      };
+    });
+
+    this.save(newNotes);
+    return newNotes;
+  }
+
   setNewCreateNotes(notes: Note[]): Note[] {
     const latestId = !notes.length ? 1 : parseInt(notes[notes.length - 1].id) + 1;
     const now = dayjs();
