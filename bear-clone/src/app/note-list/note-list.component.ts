@@ -25,6 +25,7 @@ import { NoteActions } from "../shared/actions/note.actions";
 export class NoteListComponent {
   @Input({ required: true }) selectedNote!: Note | null;
   select = output<Note | null>();
+  trash = output<void>();
 
   protected isSearchMode = signal(false);
   protected notes = this.store.selectSignal(selectAllPublicNotes);
@@ -56,5 +57,9 @@ export class NoteListComponent {
    */
   remove(noteId: string): void {
     this.store.dispatch(NoteActions.removeNotes({ noteId }));
+
+    if (noteId === this.selectedNote?.id) {
+      this.select.emit(null);
+    }
   }
 }
