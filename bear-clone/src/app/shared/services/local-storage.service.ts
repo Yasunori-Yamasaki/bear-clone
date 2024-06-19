@@ -21,9 +21,12 @@ export class LocalStorageService {
    */
   get(): Note[] {
     const data = window.localStorage.getItem(this.storageKey);
-    if (!this.isNotes(data)) return [];
+    if (!data) return [];
 
-    return JSON.parse(data);
+    const notes = JSON.parse(data);
+    if (!this.isNotes(notes)) return [];
+
+    return notes;
   }
 
   isNotes(data: any): data is Note[] {
