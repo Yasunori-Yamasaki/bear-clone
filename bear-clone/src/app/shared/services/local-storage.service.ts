@@ -21,8 +21,25 @@ export class LocalStorageService {
    */
   get(): Note[] {
     const data = window.localStorage.getItem(this.storageKey);
-    if (!data) return [];
+    if (!this.isNotes(data)) return [];
 
-    return JSON.parse(data) as Note[];
+    return JSON.parse(data);
+  }
+
+  isNotes(data: any): data is Note[] {
+    return Array.isArray(data) && data.every(this.isNote);
+  }
+
+  isNote(datum: any): datum is Note {
+    return (
+      typeof datum.id === "string" &&
+      typeof datum.title === "string" &&
+      typeof datum.content === "string" &&
+      typeof datum.htmlText === "string" &&
+      typeof datum.updatedAt === "string" &&
+      typeof datum.isDeleted === "boolean" &&
+      Array.isArray(datum.tags) &&
+      datum.tags.every((tag: any) => typeof tag === "string")
+    );
   }
 }
