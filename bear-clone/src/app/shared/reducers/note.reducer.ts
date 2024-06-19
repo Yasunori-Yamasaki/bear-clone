@@ -10,7 +10,7 @@ export const noteFeatureKey = "note";
 
 export const noteReducer = createReducer(
   initialState(),
-  on(NoteActions.addNotes, (_, { newNotes }) => newNotes),
+  on(NoteActions.addNotesSuccess, (_, { newNotes }) => newNotes),
   on(NoteActions.removeNotes, (_, { newNotes }) => newNotes),
   on(NoteActions.updateNotes, (_, { newNotes }) => newNotes)
 );

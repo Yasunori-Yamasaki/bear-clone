@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { NoteActions } from "../actions/note.actions";
-import { tap } from "rxjs";
+import { map, of, switchMap, tap } from "rxjs";
 import { LocalStorageService } from "../services/local-storage.service";
 
 @Injectable()
@@ -14,11 +14,22 @@ export class NoteEffects {
   localStorage$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(NoteActions.addNotes, NoteActions.removeNotes, NoteActions.updateNotes),
+        ofType(NoteActions.removeNotes, NoteActions.updateNotes),
         tap(({ newNotes }) => {
           this.localStorageService.save(newNotes);
         })
       ),
     { dispatch: false }
+  );
+
+  addLocalStorage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NoteActions.addNotes),
+      switchMap(() => {
+        return of(this.localStorageService.createNote()).pipe(
+          map((newNotes) => NoteActions.addNotesSuccess({ newNotes }))
+        );
+      })
+    )
   );
 }

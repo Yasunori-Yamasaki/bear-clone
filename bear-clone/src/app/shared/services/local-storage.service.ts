@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Note } from "../models/note.model";
+import dayjs from "dayjs";
 
 @Injectable({
   providedIn: "root",
@@ -27,6 +28,32 @@ export class LocalStorageService {
     if (!this.isNotes(notes)) return [];
 
     return notes;
+  }
+
+  /**
+   * 新規メモの作成処理
+   */
+  createNote(): Note[] {
+    const newNotes = this.setNewCreateNotes(this.get());
+    this.save(newNotes);
+
+    return newNotes;
+  }
+
+  setNewCreateNotes(notes: Note[]): Note[] {
+    const latestId = !notes.length ? 1 : parseInt(notes[notes.length - 1].id) + 1;
+    const now = dayjs();
+    const newNote: Note = {
+      id: latestId.toString(),
+      title: "",
+      content: "",
+      htmlText: "",
+      tags: [],
+      updatedAt: now.format("YYYY-MM-DD HH:mm:ss"),
+      isDeleted: false,
+    };
+
+    return [...notes, newNote];
   }
 
   isNotes(data: any): data is Note[] {

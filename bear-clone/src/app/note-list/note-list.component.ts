@@ -49,9 +49,7 @@ export class NoteListComponent {
    * Storeに新規メモを追加 ＆ 新規メモを選択状態にする
    */
   add(): void {
-    const newNotes = this.setNewNotes(this.allNotes());
-
-    this.store.dispatch(NoteActions.addNotes({ newNotes }));
+    this.store.dispatch(NoteActions.addNotes());
     this.select.emit(this.notes()[this.notes().length - 1]);
   }
 
@@ -73,21 +71,5 @@ export class NoteListComponent {
     if (noteId === this.selectedNote?.id) {
       this.select.emit(null);
     }
-  }
-
-  setNewNotes(notes: Note[]): Note[] {
-    const latestId = !notes.length ? 1 : parseInt(notes[notes.length - 1].id) + 1;
-    const now = dayjs();
-    const newNote: Note = {
-      id: latestId.toString(),
-      title: "",
-      content: "",
-      htmlText: "",
-      tags: [],
-      updatedAt: now.format("YYYY-MM-DD HH:mm:ss"),
-      isDeleted: false,
-    };
-
-    return [...notes, newNote];
   }
 }
