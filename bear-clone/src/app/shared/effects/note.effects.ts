@@ -14,7 +14,7 @@ export class NoteEffects {
   localStorage$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(NoteActions.addNotes),
+        ofType(NoteActions.addNotes, NoteActions.removeNotes, NoteActions.updateNotes),
         tap(({ newNotes }) => {
           this.localStorageService.save(newNotes);
         })

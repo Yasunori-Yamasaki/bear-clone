@@ -5,6 +5,7 @@ import { FormsModule } from "@angular/forms";
 import dayjs from "dayjs";
 import { Store } from "@ngrx/store";
 import { NoteActions } from "../shared/actions/note.actions";
+import { selectAllNotes } from "../shared/selectors/note.selectors";
 
 @Component({
   selector: "app-editor",
@@ -33,7 +34,14 @@ export class EditorComponent {
     if (!this.note) return;
 
     const newNote = this.setNewNote(this.note, event);
-    this.store.dispatch(NoteActions.updateNotes({ newNote }));
+    const allNotes = this.store.selectSignal(selectAllNotes)
+    const newNotes = allNotes().map((note) => {
+      if (newNote.id !== note.id) return note;
+
+      return newNote;
+    });
+
+    this.store.dispatch(NoteActions.updateNotes({ newNotes }));
   }
 
   /**

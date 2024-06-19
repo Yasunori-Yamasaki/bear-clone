@@ -29,6 +29,7 @@ export class NoteListComponent {
   trash = output<void>();
 
   protected isSearchMode = signal(false);
+  protected allNotes = this.store.selectSignal(selectAllNotes);
   protected notes = this.store.selectSignal(selectAllPublicNotes);
   protected inputVal = signal("");
   /**
@@ -48,8 +49,7 @@ export class NoteListComponent {
    * Storeに新規メモを追加 ＆ 新規メモを選択状態にする
    */
   add(): void {
-    const allNotes = this.store.selectSignal(selectAllNotes);
-    const newNotes = this.setNewNotes(allNotes());
+    const newNotes = this.setNewNotes(this.allNotes());
 
     this.store.dispatch(NoteActions.addNotes({ newNotes }));
     this.select.emit(this.notes()[this.notes().length - 1]);
@@ -60,7 +60,15 @@ export class NoteListComponent {
    * @param noteId 削除対象メモID
    */
   remove(noteId: string): void {
-    this.store.dispatch(NoteActions.removeNotes({ noteId }));
+    const newNotes = this.allNotes().map((note) => {
+      if (note.id !== noteId) return note;
+
+      return {
+        ...note,
+        isDeleted: true,
+      };
+    });
+    this.store.dispatch(NoteActions.removeNotes({ newNotes }));
 
     if (noteId === this.selectedNote?.id) {
       this.select.emit(null);
