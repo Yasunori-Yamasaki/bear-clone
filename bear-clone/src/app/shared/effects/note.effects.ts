@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { NoteActions } from "../actions/note.actions";
 import { map, of, switchMap, tap } from "rxjs";
-import { LocalStorageService } from "../services/local-storage.service";
 import { NoteApiService } from "../services/note-api.service";
 
 @Injectable()
@@ -11,6 +10,17 @@ export class NoteEffects {
     private actions$: Actions,
     private noteApiService: NoteApiService
   ) {}
+
+  getLocalStorage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NoteActions.getInitialNotes),
+      switchMap(() => {
+        return of(this.noteApiService.getAll()).pipe(
+          map((allNotes) => NoteActions.getInitialNotesSuccess({ allNotes }))
+        );
+      })
+    )
+  );
 
   addLocalStorage$ = createEffect(() =>
     this.actions$.pipe(

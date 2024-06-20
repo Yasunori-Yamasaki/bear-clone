@@ -10,8 +10,4 @@ export interface Note {
   isDeleted: boolean;
 }
 
-export const initialState = (): Note[] => {
-  const localStorageService = new LocalStorageService();
-
-  return localStorageService.get();
-};
+export const initialState = [];
