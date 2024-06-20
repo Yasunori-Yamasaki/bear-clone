@@ -40,15 +40,6 @@ export class LinkListComponent {
   }
 
   /**
-   * 下層カテゴリの表示フラグ切り替え処理
-   * @param category 選択したカテゴリオブジェクト
-   * @param bool トグル開閉の真偽値
-   */
-  toggleOpenCategory(category: Category, bool: boolean): void {
-    category.isOpen = bool;
-  }
-
-  /**
    * カテゴリーの選択処理
    * - メモは未選択状態へ変更
    * @param name 選択したカテゴリー名
