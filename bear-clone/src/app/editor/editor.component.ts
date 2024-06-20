@@ -1,18 +1,37 @@
-import { Component } from "@angular/core";
-import { QuillModule, QuillModules } from "ngx-quill";
+import { Component, Input, output } from "@angular/core";
+import { ContentChange, QuillModule, QuillModules } from "ngx-quill";
+import { Note } from "../shared/models/note.model";
+import { FormsModule } from "@angular/forms";
+import dayjs from "dayjs";
+import { Store } from "@ngrx/store";
+import { NoteActions } from "../shared/actions/note.actions";
+import { selectAllNotes } from "../shared/selectors/note.selectors";
 
 @Component({
   selector: "app-editor",
   standalone: true,
-  imports: [QuillModule],
+  imports: [QuillModule, FormsModule],
   templateUrl: "./editor.component.html",
   host: {
     class: "relative",
   },
 })
 export class EditorComponent {
+  @Input({ required: true }) note!: Note | null;
+
   protected modules: QuillModules = {
     toolbar: "#toolbar",
   };
-  protected placeholder = "";
+
+  constructor(private store: Store) {}
+
+  /**
+   * ローカルストレージ内の該当メモデータを更新
+   * @param event リッチエディタのコンテンツ内容変更イベント
+   */
+  update({ html, text }: ContentChange): void {
+    if (!this.note) return;
+
+    this.store.dispatch(NoteActions.updateNotes({ noteId: this.note.id, html, text }));
+  }
 }

@@ -4,6 +4,8 @@ import { Note } from "../models/note.model";
 
 export const selectNotesState = createFeatureSelector<Note[]>(noteFeatureKey);
 
+export const selectAllNotes = createSelector(selectNotesState, (state) => state);
+
 /**
  * 削除されていない(Trashに入っていない)メモの一覧データを取得
  */

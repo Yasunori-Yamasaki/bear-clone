@@ -1,21 +1,25 @@
 <div
   class="solid h-[100vh] w-60 overflow-y-auto border-r border-zinc-300"
-  (click)="selectedNote.set(null)"
+  (click)="select.emit(null)"
 >
   <header (click)="$event.stopPropagation()">
     @if (isSearchMode()) {
       <app-search-box
-        (toggle)="isSearchMode.set(!isSearchMode())"
+        (toggle)="isSearchMode.set(!isSearchMode()); inputVal.set('')"
         (search)="inputVal.set($event)"
       />
     } @else {
-      <app-create-and-search-btn (toggle)="isSearchMode.set(!isSearchMode())" />
+      <app-create-and-search-btn (create)="add()" (toggle)="isSearchMode.set(!isSearchMode())" />
     }
   </header>
   <ul class="px-2">
     @for (note of filteredNotes(); track note) {
-      <li (click)="$event.stopPropagation(); selectedNote.set(note)">
-        <app-note-item [isSelected]="note === selectedNote()" [note]="note" />
+      <li (click)="$event.stopPropagation(); select.emit(note)">
+        <app-note-item
+          [isSelected]="note.id === selectedNote?.id"
+          [note]="note"
+          (trash)="remove($event)"
+        />
       </li>
     }
   </ul>

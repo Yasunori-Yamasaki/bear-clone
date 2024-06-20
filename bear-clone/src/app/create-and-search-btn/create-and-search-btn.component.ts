@@ -15,6 +15,7 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 })
 export class CreateAndSearchBtnComponent {
   toggle = output<void>();
+  create = output<void>();
 
   protected faMagnifyingGlass = faMagnifyingGlass;
   protected faPenToSquare = faPenToSquare;

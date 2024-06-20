@@ -6,6 +6,8 @@ describe("FormatDatePipe", () => {
     expect(pipe).toBeTruthy();
   });
 
+  it("与えられた日時から1秒以内なら『Just Now』と表示される。", () => {});
+
   it("与えられた日時から1分以内なら『~~ seconds ago』と表示される。", () => {});
 
   it("与えられた日時から1分以上1時間以内なら『~~ minutes ago』と表示される。", () => {});

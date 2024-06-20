@@ -1,29 +1,17 @@
+import { LocalStorageService } from "../services/local-storage.service";
+
 export interface Note {
   id: string;
   title: string;
   content: string;
+  htmlText: string;
   tags: string[];
   updatedAt: string;
   isDeleted: boolean;
 }
 
-export const initialState: Note[] = [
-  {
-    id: "1",
-    title: "テストタイトル",
-    content:
-      "テスト本文 これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。これはテストですが、テストじゃない。",
-    tags: [],
-    updatedAt: "2024-06-13 10:42:00",
-    isDeleted: false,
-  },
-  {
-    id: "2",
-    title: "テストタイトル2",
-    content:
-      "テスト本文2 これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。これは本番かと思いきや、テストだ。",
-    tags: [],
-    updatedAt: "2024-06-10 00:00:00",
-    isDeleted: false,
-  },
-];
+export const initialState = (): Note[] => {
+  const localStorageService = new LocalStorageService();
+
+  return localStorageService.get();
+};
