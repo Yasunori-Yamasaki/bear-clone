@@ -4,12 +4,14 @@ import { Note } from "../shared/models/note.model";
 import { FormsModule } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { NoteActions } from "../shared/actions/note.actions";
+import { CategoryService } from "../shared/services/category.service";
+import { AsyncPipe } from "@angular/common";
 
 @Component({
   selector: "app-editor",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [QuillModule, FormsModule],
+  imports: [AsyncPipe, QuillModule, FormsModule],
   templateUrl: "./editor.component.html",
   host: {
     class: "relative",
@@ -22,7 +24,10 @@ export class EditorComponent {
     toolbar: "#toolbar",
   };
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    protected categoryService: CategoryService
+  ) {}
 
   /**
    * ローカルストレージ内の該当メモデータを更新

@@ -4,6 +4,7 @@
   [ngModel]="note!.htmlText"
   [modules]="modules"
   (onContentChanged)="update($event)"
+  [readOnly]="(categoryService.selectedCategory | async) === 'Trash'"
 />
 <div
   id="toolbar"
