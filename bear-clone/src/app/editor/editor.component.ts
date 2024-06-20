@@ -1,11 +1,9 @@
-import { Component, Input, output } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ContentChange, QuillModule, QuillModules } from "ngx-quill";
 import { Note } from "../shared/models/note.model";
 import { FormsModule } from "@angular/forms";
-import dayjs from "dayjs";
 import { Store } from "@ngrx/store";
 import { NoteActions } from "../shared/actions/note.actions";
-import { selectAllNotes } from "../shared/selectors/note.selectors";
 
 @Component({
   selector: "app-editor",
