@@ -27,7 +27,7 @@ export const selectAllTodayNotes = createSelector(selectNotesState, (state) => {
     const baseDate = dayjs(note.updatedAt);
     const oneDayAgo = dayjs().subtract(1, "day");
 
-    return baseDate.isBefore(oneDayAgo)
+    return baseDate.isAfter(oneDayAgo);
   });
 });
 
