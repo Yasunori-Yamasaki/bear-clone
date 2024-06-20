@@ -7,14 +7,15 @@ import {
   faSquareCheck,
 } from "@fortawesome/free-regular-svg-icons";
 import { faAngleDown, faAngleRight, faLock } from "@fortawesome/free-solid-svg-icons";
-import { CommonModule } from "@angular/common";
+import { NgClass, NgStyle } from "@angular/common";
 import { Category } from "../../shared/models/category.model";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-link-list",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FontAwesomeModule, CommonModule],
+  imports: [FontAwesomeModule, RouterLink, NgClass, NgStyle],
   templateUrl: "./link-list.component.html",
 })
 export class LinkListComponent {

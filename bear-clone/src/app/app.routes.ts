@@ -5,5 +5,5 @@ import { DefaultListComponent } from "./default-list/default-list.component";
 export const routes: Routes = [
   { path: "", redirectTo: "notes", pathMatch: "full" },
   { path: "notes", component: DefaultListComponent },
-  { path: "trashed", component: TrashListComponent },
+  { path: "trash", component: TrashListComponent },
 ];
