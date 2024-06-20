@@ -6,11 +6,12 @@ import { EditorComponent } from "./editor/editor.component";
 import { Note } from "./shared/models/note.model";
 import { Store } from "@ngrx/store";
 import { NoteActions } from "./shared/actions/note.actions";
+import { TrashListComponent } from "./trash-list/trash-list.component";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, SidebarComponent, NoteListComponent, EditorComponent],
+  imports: [RouterOutlet, SidebarComponent, TrashListComponent, NoteListComponent, EditorComponent],
   templateUrl: "./app.component.html",
   host: {
     class: "grid grid-cols-root",

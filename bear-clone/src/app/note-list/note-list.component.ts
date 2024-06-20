@@ -24,19 +24,18 @@ import { NoteActions } from "../shared/actions/note.actions";
 })
 export class NoteListComponent {
   @Input({ required: true }) selectedNote!: Note | null;
+  @Input({ required: true }) notes!: Note[];
   select = output<Note | null>();
-  trash = output<void>();
 
   protected isSearchMode = signal(false);
-  protected notes = this.store.selectSignal(selectAllPublicNotes);
   protected inputVal = signal("");
   /**
    * メモ一覧のフィルタリング処理
    */
   protected filteredNotes = computed(() => {
-    if (this.inputVal() === "") return this.notes();
+    if (this.inputVal() === "") return this.notes;
 
-    return this.notes().filter(
+    return this.notes.filter(
       ({ title, content }) => title.includes(this.inputVal()) || content.includes(this.inputVal())
     );
   });
@@ -48,7 +47,7 @@ export class NoteListComponent {
    */
   add(): void {
     this.store.dispatch(NoteActions.addNotes());
-    this.select.emit(this.notes()[this.notes().length - 1]);
+    this.select.emit(this.notes[this.notes.length - 1]);
   }
 
   /**

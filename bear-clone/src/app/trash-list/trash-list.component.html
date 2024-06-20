@@ -1,0 +1,5 @@
+<app-note-list
+  [selectedNote]="selectedNote"
+  [notes]="trashedNotes()"
+  (select)="select.emit($event)"
+/>
