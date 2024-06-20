@@ -16,7 +16,9 @@ export const selectAllPublicNotes = createSelector(selectNotesState, (state) => 
  * チェックリストが本文に入っているメモの一覧データを取得
  */
 export const selectAllTodoNotes = createSelector(selectNotesState, (state) => {
-  return state.filter((note) => note.htmlText.includes("data-list"));
+  return state.filter((note) => {
+    return !note.isDeleted && note.htmlText.includes("data-list");
+  });
 });
 
 /**
@@ -24,6 +26,8 @@ export const selectAllTodoNotes = createSelector(selectNotesState, (state) => {
  */
 export const selectAllTodayNotes = createSelector(selectNotesState, (state) => {
   return state.filter((note) => {
+    if (note.isDeleted) return false;
+
     const baseDate = dayjs(note.updatedAt);
     const oneDayAgo = dayjs().subtract(1, "day");
 
