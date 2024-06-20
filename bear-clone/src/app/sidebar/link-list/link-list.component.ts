@@ -7,8 +7,8 @@ import {
   faSquareCheck,
 } from "@fortawesome/free-regular-svg-icons";
 import { faAngleDown, faAngleRight, faLock } from "@fortawesome/free-solid-svg-icons";
-import { Category } from "../sidebar.component";
 import { CommonModule } from "@angular/common";
+import { Category } from "../../shared/models/category.model";
 
 @Component({
   selector: "app-link-list",

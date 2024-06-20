@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
-  IconDefinition,
   faCalendar,
   faFolder,
   faNoteSticky,
@@ -10,13 +9,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { LinkListComponent } from "./link-list/link-list.component";
-
-export type Category = {
-  name: string;
-  icon: IconDefinition;
-  isOpen: boolean;
-  categories?: Category[];
-};
+import { Category } from "../shared/models/category.model";
 
 @Component({
   selector: "app-sidebar",
