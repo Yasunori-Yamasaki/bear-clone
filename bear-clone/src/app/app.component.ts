@@ -1,18 +1,16 @@
-import { Component, OnInit, signal } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { SidebarComponent } from "./sidebar/sidebar.component";
-import { NoteListComponent } from "./note-list/note-list.component";
 import { EditorComponent } from "./editor/editor.component";
 import { Note } from "./shared/models/note.model";
 import { Store } from "@ngrx/store";
 import { NoteActions } from "./shared/actions/note.actions";
-import { TrashListComponent } from "./trash-list/trash-list.component";
 import { NoteService } from "./shared/services/note.service";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, SidebarComponent, TrashListComponent, NoteListComponent, EditorComponent],
+  imports: [RouterOutlet, SidebarComponent, EditorComponent],
   templateUrl: "./app.component.html",
   host: {
     class: "grid grid-cols-root",
