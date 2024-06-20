@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
   faCalendar,
@@ -17,9 +17,7 @@ import { Category } from "../shared/models/category.model";
   templateUrl: "./sidebar.component.html",
 })
 export class SidebarComponent {
-  selectedCategory = signal("Notes");
-
-  wrapCategories: Category[] = [
+  protected wrapCategories: Category[] = [
     {
       name: "Notes",
       icon: faNoteSticky,

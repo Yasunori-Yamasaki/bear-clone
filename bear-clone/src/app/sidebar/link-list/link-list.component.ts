@@ -1,38 +1,28 @@
-import { ChangeDetectionStrategy, Component, Input, output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import {
-  faCalendar,
-  faFolder,
-  faNoteSticky,
-  faSquareCheck,
-} from "@fortawesome/free-regular-svg-icons";
-import { faAngleDown, faAngleRight, faLock } from "@fortawesome/free-solid-svg-icons";
-import { NgClass, NgStyle } from "@angular/common";
+import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { AsyncPipe, NgClass, NgStyle } from "@angular/common";
 import { Category } from "../../shared/models/category.model";
 import { RouterLink } from "@angular/router";
+import { CategoryService } from "../../shared/services/category.service";
 
 @Component({
   selector: "app-link-list",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FontAwesomeModule, RouterLink, NgClass, NgStyle],
+  imports: [AsyncPipe, FontAwesomeModule, RouterLink, NgClass, NgStyle],
   templateUrl: "./link-list.component.html",
 })
 export class LinkListComponent {
-  @Input({ required: true }) selectedCategory!: string;
   @Input({ required: true }) wrapCategory!: Category;
   @Input({ required: true }) level!: number;
-  select = output<string>();
 
   faAngleDown = faAngleDown;
   faAngleRight = faAngleRight;
-  faCalendar = faCalendar;
-  faFolder = faFolder;
-  faLock = faLock;
-  faNoteSticky = faNoteSticky;
-  faSquareCheck = faSquareCheck;
 
   isOpen = false;
+
+  constructor(protected categoryService: CategoryService) {}
 
   /**
    * 階層構造のグループ表示用スタイリングのプロパティ値計算処理
@@ -56,9 +46,9 @@ export class LinkListComponent {
 
   /**
    * カテゴリーの選択処理
-   * @param categoryName 選択したカテゴリー名
+   * @param name 選択したカテゴリー名
    */
-  selectCategory(categoryName: string): void {
-    this.select.emit(categoryName);
+  selectCategory(name: string): void {
+    this.categoryService.changeCategory(name);
   }
 }
