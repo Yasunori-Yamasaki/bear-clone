@@ -8,8 +8,7 @@ import {
   faSquareCheck,
   faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
-import { faAngleDown, faAngleRight, faHashtag, faLock } from "@fortawesome/free-solid-svg-icons";
-import { faAngular } from "@fortawesome/free-brands-svg-icons";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { LinkListComponent } from "./link-list/link-list.component";
 
 export type Category = {
@@ -27,20 +26,7 @@ export type Category = {
   templateUrl: "./sidebar.component.html",
 })
 export class SidebarComponent {
-  faAngleDown = faAngleDown;
-  faAngleRight = faAngleRight;
-  faAngular = faAngular;
-  faCalendar = faCalendar;
-  faFolder = faFolder;
-  faHashtag = faHashtag;
-  faLock = faLock;
-  faNoteSticky = faNoteSticky;
-  faSquareCheck = faSquareCheck;
-  faTrashCan = faTrashCan;
-
   selectedCategory = signal("Notes");
-
-  // ToDo: データ格納場所を変更 & タグカテゴリー分はデータ取得するように修正。
 
   wrapCategories: Category[] = [
     {
@@ -52,13 +38,6 @@ export class SidebarComponent {
           name: "Untagged",
           icon: faFolder,
           isOpen: false,
-          categories: [
-            {
-              name: "test",
-              icon: faFolder,
-              isOpen: false,
-            },
-          ],
         },
         {
           name: "Todo",
@@ -78,7 +57,5 @@ export class SidebarComponent {
       ],
     },
     { name: "Trash", icon: faTrashCan, isOpen: false },
-    { name: "bear", icon: faAngular, isOpen: false },
-    { name: "tag", icon: faHashtag, isOpen: false },
   ];
 }
