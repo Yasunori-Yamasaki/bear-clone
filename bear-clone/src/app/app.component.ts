@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { EditorComponent } from "./editor/editor.component";
@@ -10,6 +10,7 @@ import { NoteService } from "./shared/services/note.service";
 @Component({
   selector: "app-root",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet, SidebarComponent, EditorComponent],
   templateUrl: "./app.component.html",
   host: {

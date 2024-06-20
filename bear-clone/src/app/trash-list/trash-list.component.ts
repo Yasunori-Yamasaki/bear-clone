@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { NoteListComponent } from "../note-list/note-list.component";
 import { Store } from "@ngrx/store";
 import { selectAllDeletedNotes } from "../shared/selectors/note.selectors";
@@ -6,6 +6,7 @@ import { selectAllDeletedNotes } from "../shared/selectors/note.selectors";
 @Component({
   selector: "app-trash-list",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NoteListComponent],
   templateUrl: "./trash-list.component.html",
 })

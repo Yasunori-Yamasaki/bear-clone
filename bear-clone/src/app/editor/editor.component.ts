@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { ContentChange, QuillModule, QuillModules } from "ngx-quill";
 import { Note } from "../shared/models/note.model";
 import { FormsModule } from "@angular/forms";
@@ -8,6 +8,7 @@ import { NoteActions } from "../shared/actions/note.actions";
 @Component({
   selector: "app-editor",
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [QuillModule, FormsModule],
   templateUrl: "./editor.component.html",
   host: {
