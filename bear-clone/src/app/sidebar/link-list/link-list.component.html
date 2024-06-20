@@ -5,7 +5,7 @@
     'rounded-md bg-[#FF4C43]': (categoryService.selectedCategory | async) === wrapCategory.name,
   }"
   [ngStyle]="{ 'padding-left': calcPaddingLeft(level) }"
-  (click)="selectCategory(wrapCategory.name)"
+  (click)="changeCategory(wrapCategory.name)"
 >
   <div class="relative flex gap-3">
     @if (!!wrapCategory.categories) {

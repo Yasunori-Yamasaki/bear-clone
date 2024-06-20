@@ -5,6 +5,7 @@ import { AsyncPipe, NgClass, NgStyle } from "@angular/common";
 import { Category } from "../../shared/models/category.model";
 import { RouterLink } from "@angular/router";
 import { CategoryService } from "../../shared/services/category.service";
+import { NoteService } from "../../shared/services/note.service";
 
 @Component({
   selector: "app-link-list",
@@ -22,7 +23,10 @@ export class LinkListComponent {
 
   isOpen = false;
 
-  constructor(protected categoryService: CategoryService) {}
+  constructor(
+    protected categoryService: CategoryService,
+    private noteService: NoteService
+  ) {}
 
   /**
    * 階層構造のグループ表示用スタイリングのプロパティ値計算処理
@@ -46,9 +50,11 @@ export class LinkListComponent {
 
   /**
    * カテゴリーの選択処理
+   * - メモは未選択状態へ変更
    * @param name 選択したカテゴリー名
    */
-  selectCategory(name: string): void {
+  changeCategory(name: string): void {
     this.categoryService.changeCategory(name);
+    this.noteService.resetNote();
   }
 }
