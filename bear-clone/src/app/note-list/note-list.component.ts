@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, computed, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, computed, input, signal } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CommonModule } from "@angular/common";
 import { Store } from "@ngrx/store";
@@ -23,8 +23,7 @@ import { selectSelectedNote } from "../shared/selectors/note.selectors";
   templateUrl: "./note-list.component.html",
 })
 export class NoteListComponent {
-  @Input({ required: true }) notes!: Note[];
-
+  notes = input.required<Note[]>();
   protected selectedNote = this.store.selectSignal(selectSelectedNote);
   protected isSearchMode = signal(false);
   protected inputVal = signal("");
@@ -32,9 +31,9 @@ export class NoteListComponent {
    * メモ一覧のフィルタリング処理
    */
   protected filteredNotes = computed(() => {
-    if (this.inputVal() === "") return this.notes;
+    if (this.inputVal() === "") return this.notes();
 
-    return this.notes.filter(
+    return this.notes().filter(
       ({ title, content }) => title.includes(this.inputVal()) || content.includes(this.inputVal())
     );
   });
@@ -46,7 +45,7 @@ export class NoteListComponent {
    */
   add(): void {
     this.store.dispatch(NoteActions.addNotes());
-    this.changeNote(this.notes[this.notes.length - 1]);
+    this.changeNote(this.notes()[this.notes().length - 1]);
   }
 
   /**
