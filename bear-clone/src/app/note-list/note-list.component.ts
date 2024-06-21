@@ -8,6 +8,7 @@ import { NoteItemComponent } from "./note-item/note-item.component";
 import { Note } from "../shared/models/note.model";
 import { NoteActions } from "../shared/actions/note.actions";
 import { selectSelectedNote } from "../shared/selectors/note.selectors";
+import { EditorComponent } from "../editor/editor.component";
 
 @Component({
   selector: "app-note-list",
@@ -19,8 +20,12 @@ import { selectSelectedNote } from "../shared/selectors/note.selectors";
     SearchBoxComponent,
     CreateAndSearchBtnComponent,
     NoteItemComponent,
+    EditorComponent,
   ],
   templateUrl: "./note-list.component.html",
+  host: {
+    class: "grid grid-cols-noteList",
+  },
 })
 export class NoteListComponent {
   notes = input.required<Note[]>();

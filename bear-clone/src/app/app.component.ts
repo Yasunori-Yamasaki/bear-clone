@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { SidebarComponent } from "./sidebar/sidebar.component";
-import { EditorComponent } from "./editor/editor.component";
 import { Store } from "@ngrx/store";
 import { NoteActions } from "./shared/actions/note.actions";
 import { selectSelectedNote } from "./shared/selectors/note.selectors";
@@ -10,7 +9,7 @@ import { selectSelectedNote } from "./shared/selectors/note.selectors";
   selector: "app-root",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterOutlet, SidebarComponent, EditorComponent],
+  imports: [RouterOutlet, SidebarComponent],
   templateUrl: "./app.component.html",
   host: {
     class: "grid grid-cols-root",
