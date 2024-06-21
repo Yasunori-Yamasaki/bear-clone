@@ -17,5 +17,7 @@ export const NoteActions = createActionGroup({
       text: ContentChange["text"];
     }>(),
     "Update Notes Success": props<{ newNotes: Note[] }>(),
+    "Update Selected Note": props<{ newNote: Note }>(),
+    "Reset Selected Note": emptyProps(),
   },
 });

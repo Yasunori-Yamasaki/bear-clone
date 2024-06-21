@@ -10,4 +10,12 @@ export interface Note {
   isDeleted: boolean;
 }
 
-export const initialState = [];
+export type State = {
+  notes: Note[];
+  selectedNote: Note | null;
+};
+
+export const initialState: State = {
+  notes: [],
+  selectedNote: null,
+};

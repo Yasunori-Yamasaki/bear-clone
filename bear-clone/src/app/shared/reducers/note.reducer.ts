@@ -1,13 +1,27 @@
 import { createReducer, on } from "@ngrx/store";
-import { Note, initialState } from "../models/note.model";
+import { State, initialState } from "../models/note.model";
 import { NoteActions } from "../actions/note.actions";
 
 export const noteFeatureKey = "note";
 
-export const noteReducer = createReducer<Note[]>(
+export const noteReducer = createReducer<State>(
   initialState,
-  on(NoteActions.getInitialNotesSuccess, (_, { allNotes }) => allNotes),
-  on(NoteActions.addNotesSuccess, (_, { newNotes }) => newNotes),
-  on(NoteActions.removeNotesSuccess, (_, { newNotes }) => newNotes),
-  on(NoteActions.updateNotesSuccess, (_, { newNotes }) => newNotes)
+  on(NoteActions.getInitialNotesSuccess, (state, { allNotes }) => {
+    return { ...state, notes: allNotes };
+  }),
+  on(NoteActions.addNotesSuccess, (state, { newNotes }) => {
+    return { ...state, notes: newNotes };
+  }),
+  on(NoteActions.removeNotesSuccess, (state, { newNotes }) => {
+    return { ...state, notes: newNotes };
+  }),
+  on(NoteActions.updateNotesSuccess, (state, { newNotes }) => {
+    return { ...state, notes: newNotes };
+  }),
+  on(NoteActions.updateSelectedNote, (state, { newNote }) => {
+    return { ...state, selectedNote: newNote };
+  }),
+  on(NoteActions.resetSelectedNote, (state) => {
+    return { ...state, selectedNote: null };
+  })
 );

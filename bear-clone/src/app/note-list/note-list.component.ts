@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-  computed,
-  signal,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, computed, signal } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CommonModule } from "@angular/common";
 import { Store } from "@ngrx/store";
@@ -14,7 +7,7 @@ import { CreateAndSearchBtnComponent } from "../create-and-search-btn/create-and
 import { NoteItemComponent } from "./note-item/note-item.component";
 import { Note } from "../shared/models/note.model";
 import { NoteActions } from "../shared/actions/note.actions";
-import { NoteService } from "../shared/services/note.service";
+import { selectSelectedNote } from "../shared/selectors/note.selectors";
 
 @Component({
   selector: "app-note-list",
@@ -29,10 +22,10 @@ import { NoteService } from "../shared/services/note.service";
   ],
   templateUrl: "./note-list.component.html",
 })
-export class NoteListComponent implements OnInit {
+export class NoteListComponent {
   @Input({ required: true }) notes!: Note[];
 
-  protected selectedNote: Note | null = null;
+  protected selectedNote = this.store.selectSignal(selectSelectedNote);
   protected isSearchMode = signal(false);
   protected inputVal = signal("");
   /**
@@ -46,16 +39,7 @@ export class NoteListComponent implements OnInit {
     );
   });
 
-  constructor(
-    private store: Store,
-    private noteService: NoteService
-  ) {}
-
-  ngOnInit(): void {
-    this.noteService.selectedNote.subscribe((note) => {
-      this.selectedNote = note;
-    });
-  }
+  constructor(private store: Store) {}
 
   /**
    * Storeに新規メモを追加 ＆ 新規メモを選択状態にする
@@ -72,16 +56,16 @@ export class NoteListComponent implements OnInit {
   remove(noteId: string): void {
     this.store.dispatch(NoteActions.removeNotes({ noteId }));
 
-    if (noteId === this.selectedNote?.id) {
+    if (noteId === this.selectedNote()?.id) {
       this.resetNote();
     }
   }
 
-  changeNote(note: Note): void {
-    this.noteService.changeNote(note);
+  changeNote(newNote: Note): void {
+    this.store.dispatch(NoteActions.updateSelectedNote({ newNote }));
   }
 
   resetNote(): void {
-    this.noteService.resetNote();
+    this.store.dispatch(NoteActions.resetSelectedNote());
   }
 }

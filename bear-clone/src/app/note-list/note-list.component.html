@@ -13,7 +13,7 @@
     @for (note of filteredNotes(); track note) {
       <li (click)="$event.stopPropagation(); changeNote(note)">
         <app-note-item
-          [isSelected]="note.id === selectedNote?.id"
+          [isSelected]="note.id === selectedNote()?.id"
           [note]="note"
           (trash)="remove($event)"
         />

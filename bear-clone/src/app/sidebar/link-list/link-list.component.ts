@@ -5,7 +5,8 @@ import { AsyncPipe, NgClass, NgStyle } from "@angular/common";
 import { Category } from "../../shared/models/category.model";
 import { RouterLink } from "@angular/router";
 import { CategoryService } from "../../shared/services/category.service";
-import { NoteService } from "../../shared/services/note.service";
+import { Store } from "@ngrx/store";
+import { NoteActions } from "../../shared/actions/note.actions";
 
 @Component({
   selector: "app-link-list",
@@ -25,7 +26,7 @@ export class LinkListComponent {
 
   constructor(
     protected categoryService: CategoryService,
-    private noteService: NoteService
+    private store: Store
   ) {}
 
   /**
@@ -46,6 +47,6 @@ export class LinkListComponent {
    */
   changeCategory(name: string): void {
     this.categoryService.changeCategory(name);
-    this.noteService.resetNote();
+    this.store.dispatch(NoteActions.resetSelectedNote());
   }
 }

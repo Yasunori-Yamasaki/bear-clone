@@ -2,10 +2,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { EditorComponent } from "./editor/editor.component";
-import { Note } from "./shared/models/note.model";
 import { Store } from "@ngrx/store";
 import { NoteActions } from "./shared/actions/note.actions";
-import { NoteService } from "./shared/services/note.service";
+import { selectSelectedNote } from "./shared/selectors/note.selectors";
 
 @Component({
   selector: "app-root",
@@ -18,17 +17,11 @@ import { NoteService } from "./shared/services/note.service";
   },
 })
 export class AppComponent implements OnInit {
-  protected selectedNote: Note | null = null;
+  protected selectedNote = this.store.selectSignal(selectSelectedNote);
 
-  constructor(
-    private store: Store,
-    private noteService: NoteService
-  ) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.store.dispatch(NoteActions.getInitialNotes());
-    this.noteService.selectedNote.subscribe((note) => {
-      this.selectedNote = note;
-    });
   }
 }
