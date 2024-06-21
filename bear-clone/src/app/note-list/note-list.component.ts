@@ -8,8 +8,7 @@ import { NoteItemComponent } from "./note-item/note-item.component";
 import { Note } from "../shared/models/note.model";
 import { NoteActions } from "../shared/actions/note.actions";
 import { selectSelectedNote } from "../shared/selectors/note.selectors";
-import { EditorComponent } from "../editor/editor.component";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-note-list",
@@ -21,12 +20,9 @@ import { ActivatedRoute } from "@angular/router";
     SearchBoxComponent,
     CreateAndSearchBtnComponent,
     NoteItemComponent,
-    EditorComponent,
+    RouterLink,
   ],
   templateUrl: "./note-list.component.html",
-  host: {
-    class: "grid grid-cols-noteList",
-  },
 })
 export class NoteListComponent implements OnInit {
   notes = input.required<Note[]>();

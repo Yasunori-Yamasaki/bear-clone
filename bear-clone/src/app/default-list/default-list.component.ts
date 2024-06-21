@@ -9,6 +9,9 @@ import { NoteListComponent } from "../note-list/note-list.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NoteListComponent],
   templateUrl: "./default-list.component.html",
+  host: {
+    class: "grid grid-cols-noteList",
+  },
 })
 export class DefaultListComponent {
   protected publicNotes = this.store.selectSignal(selectAllPublicNotes);

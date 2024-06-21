@@ -19,5 +19,6 @@ export const NoteActions = createActionGroup({
     "Update Notes Success": props<{ newNotes: Note[] }>(),
     "Update Selected Note": props<{ newNote: Note }>(),
     "Reset Selected Note": emptyProps(),
+    "Set Selected Note": props<{ noteId: string; notes: Note[] }>(),
   },
 });

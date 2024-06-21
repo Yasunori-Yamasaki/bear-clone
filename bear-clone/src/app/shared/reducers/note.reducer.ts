@@ -23,5 +23,11 @@ export const noteReducer = createReducer<State>(
   }),
   on(NoteActions.resetSelectedNote, (state) => {
     return { ...state, selectedNote: null };
+  }),
+  on(NoteActions.setSelectedNote, (state, { noteId, notes }) => {
+    const targetNote = notes.find((note) => note.id === noteId);
+    if (!targetNote) return state;
+
+    return { ...state, selectedNote: targetNote };
   })
 );
