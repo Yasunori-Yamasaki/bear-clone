@@ -4,6 +4,7 @@
       <app-search-box
         (toggle)="isSearchMode.set(!isSearchMode()); inputVal.set('')"
         (search)="inputVal.set($event)"
+        [inputVal]="inputVal()"
       />
     } @else {
       <app-create-and-search-btn (create)="add()" (toggle)="isSearchMode.set(!isSearchMode())" />

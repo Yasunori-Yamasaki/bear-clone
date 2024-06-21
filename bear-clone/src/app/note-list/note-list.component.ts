@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, computed, input, signal } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CommonModule } from "@angular/common";
 import { Store } from "@ngrx/store";
@@ -9,6 +9,7 @@ import { Note } from "../shared/models/note.model";
 import { NoteActions } from "../shared/actions/note.actions";
 import { selectSelectedNote } from "../shared/selectors/note.selectors";
 import { EditorComponent } from "../editor/editor.component";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-note-list",
@@ -27,7 +28,7 @@ import { EditorComponent } from "../editor/editor.component";
     class: "grid grid-cols-noteList",
   },
 })
-export class NoteListComponent {
+export class NoteListComponent implements OnInit {
   notes = input.required<Note[]>();
   protected selectedNote = this.store.selectSignal(selectSelectedNote);
   protected isSearchMode = signal(false);
@@ -43,7 +44,20 @@ export class NoteListComponent {
     );
   });
 
-  constructor(private store: Store) {}
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store
+  ) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.inputVal.set(params["search"] ?? "");
+
+      if (!!this.inputVal()) {
+        this.isSearchMode.set(true);
+      }
+    });
+  }
 
   /**
    * Storeに新規メモを追加 ＆ 新規メモを選択状態にする

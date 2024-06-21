@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, input, output } from "@angular/core";
 import { faMagnifyingGlass, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
@@ -15,6 +15,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 export class SearchBoxComponent {
   toggle = output();
   search = output<string>();
+  inputVal = input.required<string>();
 
   protected faMagnifyingGlass = faMagnifyingGlass;
   protected faCircleXmark = faCircleXmark;
