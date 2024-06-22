@@ -23,6 +23,9 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
     RouterLink,
   ],
   templateUrl: "./note-list.component.html",
+  host: {
+    class: "solid flex flex-col h-[100vh] w-60 overflow-y-auto border-r border-zinc-300",
+  },
 })
 export class NoteListComponent implements OnInit {
   notes = input.required<Note[]>();
@@ -59,27 +62,10 @@ export class NoteListComponent implements OnInit {
    * Storeに新規メモを追加 ＆ 新規メモを選択状態にする
    */
   add(): void {
+    const newNote = this.notes()[this.notes().length - 1];
+
     this.store.dispatch(NoteActions.addNotes());
-    this.changeNote(this.notes()[this.notes().length - 1]);
-  }
-
-  /**
-   * Storeから該当メモを削除
-   * @param noteId 削除対象メモID
-   */
-  remove(noteId: string): void {
-    this.store.dispatch(NoteActions.removeNotes({ noteId }));
-
-    if (noteId === this.selectedNote()?.id) {
-      this.resetNote();
-    }
-  }
-
-  changeNote(newNote: Note): void {
     this.store.dispatch(NoteActions.updateSelectedNote({ newNote }));
   }
 
-  resetNote(): void {
-    this.store.dispatch(NoteActions.resetSelectedNote());
-  }
 }

@@ -8,9 +8,13 @@ export const NoteActions = createActionGroup({
     "Get Initial Notes": emptyProps(),
     "Get Initial Notes Success": props<{ allNotes: Note[] }>(),
     "Add Notes": emptyProps(),
-    "Add Notes Success": props<{ newNotes: Note[] }>(),
-    "Remove Notes": props<{ noteId: Note["id"] }>(),
-    "Remove Notes Success": props<{ newNotes: Note[] }>(),
+    "Add Notes Success": props<{ newNotes: Note[]; createNoteId: Note["id"] }>(),
+    "Remove Notes": props<{ noteId: Note["id"]; selectedNoteId: Note["id"] }>(),
+    "Remove Notes Success": props<{
+      newNotes: Note[];
+      deleteNoteId: Note["id"];
+      selectedNoteId: Note["id"];
+    }>(),
     "Update Notes": props<{
       noteId: Note["id"];
       html: ContentChange["html"];
