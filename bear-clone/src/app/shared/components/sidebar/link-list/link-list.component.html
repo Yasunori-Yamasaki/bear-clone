@@ -1,36 +1,36 @@
 <div
   class="select-none py-0.5"
-  [routerLink]="wrapCategory.name.toLowerCase()"
+  [routerLink]="wrapCategory().name.toLowerCase()"
   [ngClass]="{
-    'rounded-md bg-[#FF4C43]': (categoryService.selectedCategory | async) === wrapCategory.name,
+    'rounded-md bg-[#FF4C43]': (categoryService.selectedCategory | async) === wrapCategory().name,
   }"
-  [ngStyle]="{ 'padding-left': calcPaddingLeft(level) }"
-  (click)="changeCategory(wrapCategory.name)"
+  [ngStyle]="{ 'padding-left': calcPaddingLeft(level()) }"
+  (click)="changeCategory(wrapCategory().name)"
 >
   <div class="relative flex gap-3">
-    @if (!!wrapCategory.categories) {
-      @if (wrapCategory.isOpen) {
+    @if (!!wrapCategory().categories) {
+      @if (wrapCategory().isOpen) {
         <fa-icon
           class="absolute -left-6"
           [icon]="faAngleDown"
-          (click)="$event.stopPropagation(); wrapCategory.isOpen = false"
+          (click)="$event.stopPropagation(); wrapCategory().isOpen = false"
         />
       } @else {
         <fa-icon
           class="absolute -left-6"
           [icon]="faAngleRight"
-          (click)="$event.stopPropagation(); wrapCategory.isOpen = true"
+          (click)="$event.stopPropagation(); wrapCategory().isOpen = true"
         />
       }
     }
-    <fa-icon [icon]="wrapCategory.icon" />{{ wrapCategory.name }}
+    <fa-icon [icon]="wrapCategory().icon" />{{ wrapCategory().name }}
   </div>
 </div>
-@if (!!wrapCategory.categories && wrapCategory.isOpen) {
+@if (!!wrapCategory().categories && wrapCategory().isOpen) {
   <ul>
-    @for (category of wrapCategory.categories; track category) {
+    @for (category of wrapCategory().categories; track category) {
       <li>
-        <app-link-list [wrapCategory]="category" [level]="level + 1" />
+        <app-link-list [wrapCategory]="category" [level]="level() + 1" />
       </li>
     }
   </ul>

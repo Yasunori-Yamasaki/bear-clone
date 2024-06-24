@@ -1,14 +1,6 @@
 import { NoteActions } from "@actions/note.actions";
 import { CommonModule } from "@angular/common";
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-  computed,
-  input,
-  signal,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, computed, input, signal } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { CreateAndSearchBtnComponent } from "@components/create-and-search-btn/create-and-search-btn.component";
 import { NoteItemComponent } from "@components/note-list/note-item/note-item.component";
@@ -36,7 +28,9 @@ import { selectSelectedNote } from "@selectors/note.selectors";
   },
 })
 export class NoteListComponent implements OnInit {
-  notes = input.required<Note[]>();
+  public category = input.required<string>();
+  public notes = input.required<Note[]>();
+
   protected selectedNote = this.store.selectSignal(selectSelectedNote);
   protected isSearchMode = signal(false);
   protected inputVal = signal("");
@@ -50,7 +44,6 @@ export class NoteListComponent implements OnInit {
       ({ title, content }) => title.includes(this.inputVal()) || content.includes(this.inputVal())
     );
   });
-  @Input({ required: true }) category!: string;
 
   constructor(
     private route: ActivatedRoute,

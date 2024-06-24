@@ -1,6 +1,6 @@
 import { NoteActions } from "@actions/note.actions";
 import { AsyncPipe, NgClass, NgStyle } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -16,13 +16,11 @@ import { CategoryService } from "@services/category.service";
   templateUrl: "./link-list.component.html",
 })
 export class LinkListComponent {
-  @Input({ required: true }) wrapCategory!: Category;
-  @Input({ required: true }) level!: number;
+  public wrapCategory = input.required<Category>();
+  public level = input.required<number>();
 
-  faAngleDown = faAngleDown;
-  faAngleRight = faAngleRight;
-
-  isOpen = false;
+  protected faAngleDown = faAngleDown;
+  protected faAngleRight = faAngleRight;
 
   constructor(
     protected categoryService: CategoryService,

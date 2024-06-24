@@ -1,6 +1,6 @@
 import { NoteActions } from "@actions/note.actions";
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { Note } from "@models/note.model";
@@ -15,11 +15,11 @@ import { FormatDatePipe } from "@pipes/format-date.pipe";
   templateUrl: "./note-item.component.html",
 })
 export class NoteItemComponent {
-  @Input({ required: true }) isSelected!: boolean;
-  @Input({ required: true }) note!: Note;
-  @Input({ required: true }) selectedNoteId!: Note["id"];
+  public isSelected = input.required<boolean>();
+  public note = input.required<Note>();
+  public selectedNoteId = input.required<Note["id"]>();
 
-  faTrashCan = faTrashCan;
+  protected faTrashCan = faTrashCan;
 
   constructor(private store: Store) {}
 
@@ -28,6 +28,6 @@ export class NoteItemComponent {
    * @param noteId 削除対象メモID
    */
   remove(noteId: string): void {
-    this.store.dispatch(NoteActions.removeNotes({ noteId, selectedNoteId: this.selectedNoteId }));
+    this.store.dispatch(NoteActions.removeNotes({ noteId, selectedNoteId: this.selectedNoteId() }));
   }
 }
