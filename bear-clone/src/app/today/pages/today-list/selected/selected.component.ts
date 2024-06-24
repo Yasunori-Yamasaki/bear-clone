@@ -15,6 +15,9 @@ import { NoteListComponent } from "../../../../shared/components/note-list/note-
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NoteListComponent, EditorComponent],
   templateUrl: "./selected.component.html",
+  host: {
+    class: "grid grid-cols-noteList",
+  },
 })
 export class SelectedComponent {
   protected todayNotes = this.store.selectSignal(selectAllTodayNotes);

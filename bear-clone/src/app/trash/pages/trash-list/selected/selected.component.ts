@@ -15,6 +15,9 @@ import { EditorComponent } from "../../../../shared/components/editor/editor.com
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NoteListComponent, EditorComponent],
   templateUrl: "./selected.component.html",
+  host: {
+    class: "grid grid-cols-noteList",
+  },
 })
 export class SelectedComponent implements OnInit, OnDestroy {
   protected deletedNotes = this.store.selectSignal(selectAllDeletedNotes);
