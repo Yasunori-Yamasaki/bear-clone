@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { selectAllPublicNotes, selectSelectedNote } from "../../shared/selectors/note.selectors";
 import { Store } from "@ngrx/store";
-import { NoteListComponent } from "../../note-list/note-list.component";
-import { EditorComponent } from "../../editor/editor.component";
 import { ActivatedRoute } from "@angular/router";
-import { NoteActions } from "../../shared/actions/note.actions";
+import { NoteListComponent } from "../../../../note-list/note-list.component";
+import { EditorComponent } from "../../../../editor/editor.component";
+import {
+  selectAllPublicNotes,
+  selectSelectedNote,
+} from "../../../../shared/selectors/note.selectors";
+import { NoteActions } from "../../../../shared/actions/note.actions";
 
 @Component({
   selector: "app-selected",
