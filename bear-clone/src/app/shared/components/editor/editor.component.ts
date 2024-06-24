@@ -19,6 +19,7 @@ import { AsyncPipe } from "@angular/common";
 })
 export class EditorComponent {
   @Input({ required: true }) note!: Note | null;
+  @Input() readOnly = false;
 
   protected modules: QuillModules = {
     toolbar: "#toolbar",
