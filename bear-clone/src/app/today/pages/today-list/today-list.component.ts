@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { NoteListComponent } from "../note-list/note-list.component";
 import { Store } from "@ngrx/store";
-import { selectAllTodayNotes } from "../shared/selectors/note.selectors";
+import { NoteListComponent } from "../../../shared/components/note-list/note-list.component";
+import { selectAllTodayNotes } from "../../../shared/selectors/note.selectors";
 
 @Component({
   selector: "app-today-list",

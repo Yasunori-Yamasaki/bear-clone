@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, output } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { CategoryService } from "../shared/services/category.service";
 import { AsyncPipe } from "@angular/common";
+import { CategoryService } from "../../services/category.service";
 
 @Component({
   selector: "app-create-and-search-btn",

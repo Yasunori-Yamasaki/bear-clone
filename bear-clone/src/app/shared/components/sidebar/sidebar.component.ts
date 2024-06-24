@@ -7,7 +7,7 @@ import {
   faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
 import { LinkListComponent } from "./link-list/link-list.component";
-import { Category } from "../shared/models/category.model";
+import { Category } from "../../models/category.model";
 
 @Component({
   selector: "app-sidebar",

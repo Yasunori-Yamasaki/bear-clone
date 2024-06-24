@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { ActivatedRoute } from "@angular/router";
-import { NoteListComponent } from "../../../../note-list/note-list.component";
-import { EditorComponent } from "../../../../editor/editor.component";
+import { NoteListComponent } from "../../../../shared/components/note-list/note-list.component";
+import { EditorComponent } from "../../../../shared/components/editor/editor.component";
 import {
   selectAllPublicNotes,
   selectSelectedNote,

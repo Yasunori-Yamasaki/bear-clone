@@ -3,12 +3,12 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CommonModule } from "@angular/common";
 import { Store } from "@ngrx/store";
 import { SearchBoxComponent } from "./search-box/search-box.component";
-import { CreateAndSearchBtnComponent } from "../create-and-search-btn/create-and-search-btn.component";
 import { NoteItemComponent } from "./note-item/note-item.component";
-import { Note } from "../shared/models/note.model";
-import { NoteActions } from "../shared/actions/note.actions";
-import { selectSelectedNote } from "../shared/selectors/note.selectors";
+import { Note } from "../../models/note.model";
+import { NoteActions } from "../../actions/note.actions";
+import { selectSelectedNote } from "../../selectors/note.selectors";
 import { ActivatedRoute, RouterLink } from "@angular/router";
+import { CreateAndSearchBtnComponent } from "../create-and-search-btn/create-and-search-btn.component";
 
 @Component({
   selector: "app-note-list",
@@ -67,5 +67,4 @@ export class NoteListComponent implements OnInit {
     this.store.dispatch(NoteActions.addNotes());
     this.store.dispatch(NoteActions.updateSelectedNote({ newNote }));
   }
-
 }

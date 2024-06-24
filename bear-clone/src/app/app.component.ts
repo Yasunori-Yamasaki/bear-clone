@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { SidebarComponent } from "./sidebar/sidebar.component";
 import { Store } from "@ngrx/store";
 import { NoteActions } from "./shared/actions/note.actions";
 import { selectSelectedNote } from "./shared/selectors/note.selectors";
+import { SidebarComponent } from "./shared/components/sidebar/sidebar.component";
 
 @Component({
   selector: "app-root",
