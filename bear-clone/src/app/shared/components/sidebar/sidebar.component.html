@@ -1,0 +1,7 @@
+<nav
+  class="h-[100vh] w-44 overflow-x-auto whitespace-nowrap bg-[#2E3236] px-1 py-8 text-sm text-[#FFFFFF]"
+>
+  @for (wrapCategory of wrapCategories; track wrapCategory) {
+    <app-link-list [wrapCategory]="wrapCategory" [level]="0" />
+  }
+</nav>

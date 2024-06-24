@@ -10,8 +10,12 @@ export interface Note {
   isDeleted: boolean;
 }
 
-export const initialState = (): Note[] => {
-  const localStorageService = new LocalStorageService();
+export type State = {
+  notes: Note[];
+  selectedNote: Note | null;
+};
 
-  return localStorageService.get();
+export const initialState: State = {
+  notes: [],
+  selectedNote: null,
 };

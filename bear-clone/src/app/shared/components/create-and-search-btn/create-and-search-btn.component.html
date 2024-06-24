@@ -1,0 +1,9 @@
+<div class="p-2 font-bold">{{ selectedCategory }}</div>
+<div class="flex gap-2 text-xl text-[#888889]">
+  <button class="h-8 w-9 rounded-md hover:bg-zinc-100" (click)="createNote()">
+    <fa-icon [icon]="faPenToSquare" />
+  </button>
+  <button class="h-8 w-9 rounded-md hover:bg-zinc-100" (click)="toggle.emit()">
+    <fa-icon [icon]="faMagnifyingGlass" />
+  </button>
+</div>

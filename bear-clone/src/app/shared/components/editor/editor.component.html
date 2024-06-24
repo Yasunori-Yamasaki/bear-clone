@@ -1,0 +1,35 @@
+<quill-editor
+  class="h-[calc(100vh-1rem)] w-full"
+  placeholder=""
+  [ngModel]="note!.htmlText"
+  [modules]="modules"
+  (onContentChanged)="update($event)"
+  [readOnly]="readOnly"
+/>
+@if (!readOnly) {
+  <div
+    id="toolbar"
+    class="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-lg !border-0 bg-[#E9E9E8]"
+  >
+    <select class="ql-header">
+      <option selected></option>
+      <option value="1"></option>
+      <option value="2"></option>
+      <option value="3"></option>
+      <option value="4"></option>
+      <option value="5"></option>
+      <option value="6"></option>
+    </select>
+    <button class="ql-list" value="check"></button>
+    <button class="ql-list" value="ordered"></button>
+    <button class="ql-list" value="bullet"></button>
+    <button class="ql-bold"></button>
+    <button class="ql-italic"></button>
+    <button class="ql-underline"></button>
+    <button class="ql-strike"></button>
+    <button class="ql-link"></button>
+    <button class="ql-image"></button>
+    <button class="ql-blockquote"></button>
+    <button class="ql-code-block"></button>
+  </div>
+}

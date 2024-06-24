@@ -11,6 +11,14 @@ export class NoteApiService {
   constructor(private localStorageService: LocalStorageService) {}
 
   /**
+   * ローカルストレージに保存中のメモ一覧データを取得
+   * @returns メモ一覧データ
+   */
+  getAll(): Note[] {
+    return this.localStorageService.get();
+  }
+
+  /**
    * 新規メモの作成処理
    */
   create(): Note[] {
