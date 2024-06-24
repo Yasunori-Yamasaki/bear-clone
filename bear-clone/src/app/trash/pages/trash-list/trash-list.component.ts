@@ -9,6 +9,9 @@ import { selectAllDeletedNotes } from "../../../shared/selectors/note.selectors"
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NoteListComponent],
   templateUrl: "./trash-list.component.html",
+  host: {
+    class: "grid grid-cols-noteList",
+  },
 })
 export class TrashListComponent {
   protected trashedNotes = this.store.selectSignal(selectAllDeletedNotes);

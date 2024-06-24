@@ -9,6 +9,9 @@ import { selectAllTodayNotes } from "../../../shared/selectors/note.selectors";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NoteListComponent],
   templateUrl: "./today-list.component.html",
+  host: {
+    class: "grid grid-cols-noteList",
+  },
 })
 export class TodayListComponent {
   protected todayNotes = this.store.selectSignal(selectAllTodayNotes);

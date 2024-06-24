@@ -9,11 +9,11 @@
     <app-create-and-search-btn (create)="add()" (toggle)="isSearchMode.set(!isSearchMode())" />
   }
 </header>
-<a class="w-full flex-1" [routerLink]="['/notes']">
+<a class="w-full flex-1 cursor-auto" [routerLink]="['/', category.toLowerCase()]">
   <ul class="px-2">
     @for (note of filteredNotes(); track note) {
       <li>
-        <a [routerLink]="['/notes', note.id]" (click)="$event.stopPropagation()">
+        <a [routerLink]="['/', category.toLowerCase(), note.id]" (click)="$event.stopPropagation()">
           <app-note-item
             [isSelected]="note.id === selectedNote()?.id"
             [note]="note"

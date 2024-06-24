@@ -9,6 +9,9 @@ import { Store } from "@ngrx/store";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NoteListComponent],
   templateUrl: "./todo-list.component.html",
+  host: {
+    class: "grid grid-cols-noteList",
+  },
 })
 export class TodoListComponent {
   protected todoNotes = this.store.selectSignal(selectAllTodoNotes);

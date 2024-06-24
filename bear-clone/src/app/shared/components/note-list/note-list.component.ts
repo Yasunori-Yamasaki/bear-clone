@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit, computed, input, signal } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  computed,
+  input,
+  signal,
+} from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CommonModule } from "@angular/common";
 import { Store } from "@ngrx/store";
@@ -42,6 +50,7 @@ export class NoteListComponent implements OnInit {
       ({ title, content }) => title.includes(this.inputVal()) || content.includes(this.inputVal())
     );
   });
+  @Input({ required: true }) category!: string;
 
   constructor(
     private route: ActivatedRoute,
