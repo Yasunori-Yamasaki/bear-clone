@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
-import { Note } from "../models/note.model";
+import { Note } from "@models/note.model";
 import { ContentChange } from "ngx-quill";
 
 export const NoteActions = createActionGroup({

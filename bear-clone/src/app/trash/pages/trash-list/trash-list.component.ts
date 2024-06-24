@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { NoteListComponent } from "../../../shared/components/note-list/note-list.component";
+import { NoteListComponent } from "@components/note-list/note-list.component";
 import { Store } from "@ngrx/store";
-import { selectAllDeletedNotes } from "../../../shared/selectors/note.selectors";
+import { selectAllDeletedNotes } from "@selectors/note.selectors";
 
 @Component({
   selector: "app-trash-list",

@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
-import { State, initialState } from "../models/note.model";
-import { NoteActions } from "../actions/note.actions";
+import { State, initialState } from "@models/note.model";
+import { NoteActions } from "@actions/note.actions";
 
 export const noteFeatureKey = "note";
 

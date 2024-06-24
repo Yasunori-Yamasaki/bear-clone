@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { NoteActions } from "../actions/note.actions";
+import { NoteActions } from "@actions/note.actions";
 import { map, of, switchMap, tap } from "rxjs";
-import { NoteApiService } from "../services/note-api.service";
+import { NoteApiService } from "@services/note-api.service";
 import { Router } from "@angular/router";
 
 @Injectable()
@@ -10,7 +10,7 @@ export class NoteEffects {
   constructor(
     private actions$: Actions,
     private noteApiService: NoteApiService,
-    private router: Router,
+    private router: Router
   ) {}
 
   getLocalStorage$ = createEffect(() =>

@@ -4,9 +4,9 @@ import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { AsyncPipe, NgClass, NgStyle } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { Category } from "../../../models/category.model";
-import { CategoryService } from "../../../services/category.service";
-import { NoteActions } from "../../../actions/note.actions";
+import { Category } from "@models/category.model";
+import { CategoryService } from "@services/category.service";
+import { NoteActions } from "@actions/note.actions";
 
 @Component({
   selector: "app-link-list",

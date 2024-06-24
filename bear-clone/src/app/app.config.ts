@@ -3,10 +3,10 @@ import { provideRouter } from "@angular/router";
 
 import { routes } from "./app.routes";
 import { provideStore } from "@ngrx/store";
-import { reducers, metaReducers } from "./shared/reducers";
+import { reducers, metaReducers } from "@reducers/index";
 import { provideStoreDevtools } from "@ngrx/store-devtools";
 import { provideEffects } from "@ngrx/effects";
-import { effects } from "./shared/effects";
+import { effects } from "@effects/index";
 
 export const appConfig: ApplicationConfig = {
   providers: [

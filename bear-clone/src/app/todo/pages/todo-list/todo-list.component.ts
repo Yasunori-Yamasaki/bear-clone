@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { NoteListComponent } from "../../../shared/components/note-list/note-list.component";
-import { selectAllTodoNotes } from "../../../shared/selectors/note.selectors";
+import { NoteListComponent } from "@components/note-list/note-list.component";
+import { selectAllTodoNotes } from "@selectors/note.selectors";
 import { Store } from "@ngrx/store";
 
 @Component({

@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { ContentChange, QuillModule, QuillModules } from "ngx-quill";
-import { Note } from "../../models/note.model";
+import { Note } from "@models/note.model";
 import { FormsModule } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { NoteActions } from "../../actions/note.actions";
-import { CategoryService } from "../../services/category.service";
+import { NoteActions } from "@actions/note.actions";
+import { CategoryService } from "@services/category.service";
 import { AsyncPipe } from "@angular/common";
 
 @Component({

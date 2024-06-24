@@ -1,13 +1,10 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import {
-  selectAllTodoNotes,
-  selectSelectedNote,
-} from "../../../../shared/selectors/note.selectors";
+import { selectAllTodoNotes, selectSelectedNote } from "@selectors/note.selectors";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { NoteActions } from "../../../../shared/actions/note.actions";
-import { NoteListComponent } from "../../../../shared/components/note-list/note-list.component";
-import { EditorComponent } from "../../../../shared/components/editor/editor.component";
+import { NoteActions } from "@actions/note.actions";
+import { NoteListComponent } from "@components/note-list/note-list.component";
+import { EditorComponent } from "@components/editor/editor.component";
 
 @Component({
   selector: "app-selected",

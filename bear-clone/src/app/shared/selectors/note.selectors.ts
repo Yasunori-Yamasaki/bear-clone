@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { noteFeatureKey } from "../reducers/note.reducer";
-import { Note, State } from "../models/note.model";
+import { noteFeatureKey } from "@reducers/note.reducer";
+import { Note, State } from "@models/note.model";
 import dayjs from "dayjs";
 
 export const selectNotesState = createFeatureSelector<State>(noteFeatureKey);
