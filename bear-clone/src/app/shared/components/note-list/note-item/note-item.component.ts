@@ -1,11 +1,11 @@
+import { NoteActions } from "@actions/note.actions";
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
-import { Note } from "@models/note.model";
-import { FormatDatePipe } from "@pipes/format-date.pipe";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { Note } from "@models/note.model";
 import { Store } from "@ngrx/store";
-import { NoteActions } from "@actions/note.actions";
+import { FormatDatePipe } from "@pipes/format-date.pipe";
 
 @Component({
   selector: "app-note-item",

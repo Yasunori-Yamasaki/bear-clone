@@ -1,7 +1,7 @@
 import { isDevMode } from "@angular/core";
+import { State as NoteState } from "@models/note.model";
 import { ActionReducerMap, MetaReducer } from "@ngrx/store";
 import { noteFeatureKey, noteReducer } from "./note.reducer";
-import { State as NoteState } from "@models/note.model";
 
 export interface State {
   [noteFeatureKey]: NoteState;

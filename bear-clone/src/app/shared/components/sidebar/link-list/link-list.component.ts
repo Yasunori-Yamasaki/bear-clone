@@ -1,12 +1,12 @@
+import { NoteActions } from "@actions/note.actions";
+import { AsyncPipe, NgClass, NgStyle } from "@angular/common";
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { RouterLink } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { AsyncPipe, NgClass, NgStyle } from "@angular/common";
-import { RouterLink } from "@angular/router";
-import { Store } from "@ngrx/store";
 import { Category } from "@models/category.model";
+import { Store } from "@ngrx/store";
 import { CategoryService } from "@services/category.service";
-import { NoteActions } from "@actions/note.actions";
 
 @Component({
   selector: "app-link-list",

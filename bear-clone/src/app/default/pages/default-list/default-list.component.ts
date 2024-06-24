@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { NoteListComponent } from "@components/note-list/note-list.component";
 import { Store } from "@ngrx/store";
 import { selectAllPublicNotes } from "@selectors/note.selectors";
-import { NoteListComponent } from "@components/note-list/note-list.component";
 
 @Component({
   selector: "app-default-list",

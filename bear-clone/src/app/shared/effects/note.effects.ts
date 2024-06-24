@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { NoteActions } from "@actions/note.actions";
-import { map, of, switchMap, tap } from "rxjs";
-import { NoteApiService } from "@services/note-api.service";
+import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { NoteApiService } from "@services/note-api.service";
+import { map, of, switchMap, tap } from "rxjs";
 
 @Injectable()
 export class NoteEffects {

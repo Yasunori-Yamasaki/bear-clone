@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, output } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { AsyncPipe } from "@angular/common";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { CategoryService } from "@services/category.service";
 
 @Component({

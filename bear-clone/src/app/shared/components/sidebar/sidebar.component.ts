@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { LinkListComponent } from "@components/sidebar/link-list/link-list.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
   faCalendar,
@@ -6,7 +7,6 @@ import {
   faSquareCheck,
   faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
-import { LinkListComponent } from "@components/sidebar/link-list/link-list.component";
 import { Category } from "@models/category.model";
 
 @Component({

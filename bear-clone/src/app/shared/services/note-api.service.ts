@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Note } from "@models/note.model";
-import { ContentChange } from "ngx-quill";
-import dayjs from "dayjs";
 import { LocalStorageService } from "@services/local-storage.service";
+import dayjs from "dayjs";
+import { ContentChange } from "ngx-quill";
 
 @Injectable({
   providedIn: "root",

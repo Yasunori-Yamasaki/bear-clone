@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DefaultListComponent } from './default-list.component';
+import { DefaultListComponent } from "./default-list.component";
 
-describe('DefaultListComponent', () => {
+describe("DefaultListComponent", () => {
   let component: DefaultListComponent;
   let fixture: ComponentFixture<DefaultListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DefaultListComponent]
-    })
-    .compileComponents();
-    
+      imports: [DefaultListComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(DefaultListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

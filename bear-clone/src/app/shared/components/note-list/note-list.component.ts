@@ -1,3 +1,5 @@
+import { NoteActions } from "@actions/note.actions";
+import { CommonModule } from "@angular/common";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,16 +9,14 @@ import {
   input,
   signal,
 } from "@angular/core";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { CommonModule } from "@angular/common";
-import { Store } from "@ngrx/store";
-import { Note } from "@models/note.model";
-import { NoteActions } from "@actions/note.actions";
-import { selectSelectedNote } from "@selectors/note.selectors";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { CreateAndSearchBtnComponent } from "@components/create-and-search-btn/create-and-search-btn.component";
-import { SearchBoxComponent } from "@components/note-list/search-box/search-box.component";
 import { NoteItemComponent } from "@components/note-list/note-item/note-item.component";
+import { SearchBoxComponent } from "@components/note-list/search-box/search-box.component";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { Note } from "@models/note.model";
+import { Store } from "@ngrx/store";
+import { selectSelectedNote } from "@selectors/note.selectors";
 
 @Component({
   selector: "app-note-list",
