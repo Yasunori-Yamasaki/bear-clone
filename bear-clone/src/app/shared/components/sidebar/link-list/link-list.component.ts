@@ -1,4 +1,4 @@
-import { NoteActions } from "@actions/note.actions";
+import { NotePageActions } from "@actions/note.actions";
 import { AsyncPipe, NgClass, NgStyle } from "@angular/common";
 import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { RouterLink } from "@angular/router";
@@ -45,6 +45,6 @@ export class LinkListComponent {
    */
   changeCategory(name: string): void {
     this.categoryService.changeCategory(name);
-    this.store.dispatch(NoteActions.resetSelectedNote());
+    this.store.dispatch(NotePageActions.resetSelectedNote());
   }
 }

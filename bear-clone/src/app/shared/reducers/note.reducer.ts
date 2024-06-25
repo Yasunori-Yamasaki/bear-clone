@@ -1,4 +1,4 @@
-import { NoteActions } from "@actions/note.actions";
+import { NoteLocalStorageActions, NotePageActions } from "@actions/note.actions";
 import { State, initialState } from "@models/note.model";
 import { createReducer, on } from "@ngrx/store";
 
@@ -6,25 +6,25 @@ export const noteFeatureKey = "note";
 
 export const noteReducer = createReducer<State>(
   initialState,
-  on(NoteActions.getInitialNotesSuccess, (state, { allNotes }) => {
+  on(NoteLocalStorageActions.getInitialNotesSuccess, (state, { allNotes }) => {
     return { ...state, notes: allNotes };
   }),
-  on(NoteActions.addNotesSuccess, (state, { newNote }) => {
+  on(NoteLocalStorageActions.addNotesSuccess, (state, { newNote }) => {
     return { ...state, notes: [...state.notes, newNote] };
   }),
-  on(NoteActions.removeNotesSuccess, (state, { newNotes }) => {
+  on(NoteLocalStorageActions.removeNotesSuccess, (state, { newNotes }) => {
     return { ...state, notes: newNotes };
   }),
-  on(NoteActions.updateNotesSuccess, (state, { newNotes }) => {
+  on(NoteLocalStorageActions.updateNotesSuccess, (state, { newNotes }) => {
     return { ...state, notes: newNotes };
   }),
-  on(NoteActions.updateSelectedNote, (state, { newNote }) => {
+  on(NotePageActions.updateSelectedNote, (state, { newNote }) => {
     return { ...state, selectedNote: newNote };
   }),
-  on(NoteActions.resetSelectedNote, (state) => {
+  on(NotePageActions.resetSelectedNote, (state) => {
     return { ...state, selectedNote: null };
   }),
-  on(NoteActions.setSelectedNote, (state, { noteId, notes }) => {
+  on(NotePageActions.setSelectedNote, (state, { noteId, notes }) => {
     const targetNote = notes.find((note) => note.id === noteId);
     if (!targetNote) return state;
 

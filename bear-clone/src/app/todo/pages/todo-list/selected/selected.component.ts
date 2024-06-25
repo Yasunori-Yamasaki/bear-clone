@@ -1,4 +1,4 @@
-import { NoteActions } from "@actions/note.actions";
+import { NotePageActions } from "@actions/note.actions";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { EditorComponent } from "@components/editor/editor.component";
@@ -29,11 +29,11 @@ export class SelectedComponent {
     this.route.params.subscribe((params) => {
       const noteId = params["id"];
 
-      this.store.dispatch(NoteActions.setSelectedNote({ noteId, notes: this.todoNotes() }));
+      this.store.dispatch(NotePageActions.setSelectedNote({ noteId, notes: this.todoNotes() }));
     });
   }
 
   ngOnDestroy(): void {
-    this.store.dispatch(NoteActions.resetSelectedNote());
+    this.store.dispatch(NotePageActions.resetSelectedNote());
   }
 }

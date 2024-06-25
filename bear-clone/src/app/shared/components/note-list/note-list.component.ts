@@ -1,4 +1,4 @@
-import { NoteActions } from "@actions/note.actions";
+import { NoteLocalStorageActions, NotePageActions } from "@actions/note.actions";
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, OnInit, computed, input, signal } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
@@ -66,7 +66,7 @@ export class NoteListComponent implements OnInit {
   add(): void {
     const newNote = this.notes()[this.notes().length - 1];
 
-    this.store.dispatch(NoteActions.addNotes());
-    this.store.dispatch(NoteActions.updateSelectedNote({ newNote }));
+    this.store.dispatch(NoteLocalStorageActions.addNotes());
+    this.store.dispatch(NotePageActions.updateSelectedNote({ newNote }));
   }
 }

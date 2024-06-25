@@ -1,4 +1,4 @@
-import { NoteActions } from "@actions/note.actions";
+import { NoteLocalStorageActions } from "@actions/note.actions";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
@@ -15,10 +15,10 @@ export class NoteEffects {
 
   getLocalStorage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(NoteActions.getInitialNotes),
+      ofType(NoteLocalStorageActions.getInitialNotes),
       switchMap(() => {
         return of(this.noteApiService.getAll()).pipe(
-          map((allNotes) => NoteActions.getInitialNotesSuccess({ allNotes }))
+          map((allNotes) => NoteLocalStorageActions.getInitialNotesSuccess({ allNotes }))
         );
       })
     )
@@ -26,11 +26,11 @@ export class NoteEffects {
 
   addLocalStorage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(NoteActions.addNotes),
+      ofType(NoteLocalStorageActions.addNotes),
       switchMap(() => {
         return of(this.noteApiService.create()).pipe(
           map((newNote) =>
-            NoteActions.addNotesSuccess({
+            NoteLocalStorageActions.addNotesSuccess({
               newNote,
             })
           )
@@ -41,12 +41,12 @@ export class NoteEffects {
 
   removeLocalStorage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(NoteActions.removeNotes),
+      ofType(NoteLocalStorageActions.removeNotes),
       switchMap(({ noteId, selectedNoteId }) => {
         return of(this.noteApiService.delete(noteId)).pipe(
           map((deletedNote) => {
             const newNotes = this.noteApiService.getAll();
-            return NoteActions.removeNotesSuccess({
+            return NoteLocalStorageActions.removeNotesSuccess({
               newNotes,
               deletedNote,
               selectedNoteId,
@@ -59,12 +59,12 @@ export class NoteEffects {
 
   updateLocalStorage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(NoteActions.updateNotes),
+      ofType(NoteLocalStorageActions.updateNotes),
       switchMap(({ noteId, html, text }) => {
         return of(this.noteApiService.update(noteId, html, text)).pipe(
           map(() => {
             const newNotes = this.noteApiService.getAll();
-            return NoteActions.updateNotesSuccess({ newNotes });
+            return NoteLocalStorageActions.updateNotesSuccess({ newNotes });
           })
         );
       })
@@ -74,7 +74,7 @@ export class NoteEffects {
   addSuccessfulNavigate$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(NoteActions.addNotesSuccess),
+        ofType(NoteLocalStorageActions.addNotesSuccess),
         tap(({ newNote }) => {
           this.router.navigate(["/notes", newNote.id]);
         })
@@ -85,7 +85,7 @@ export class NoteEffects {
   removeSuccessfulNNavigate$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(NoteActions.removeNotesSuccess),
+        ofType(NoteLocalStorageActions.removeNotesSuccess),
         tap(({ deletedNote, selectedNoteId }) => {
           if (deletedNote.id === selectedNoteId) {
             this.router.navigate(["/notes"]);

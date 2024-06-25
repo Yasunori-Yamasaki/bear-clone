@@ -1,4 +1,4 @@
-import { NoteActions } from "@actions/note.actions";
+import { NoteLocalStorageActions } from "@actions/note.actions";
 import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -28,6 +28,8 @@ export class NoteItemComponent {
    * @param noteId 削除対象メモID
    */
   remove(noteId: string): void {
-    this.store.dispatch(NoteActions.removeNotes({ noteId, selectedNoteId: this.selectedNoteId() }));
+    this.store.dispatch(
+      NoteLocalStorageActions.removeNotes({ noteId, selectedNoteId: this.selectedNoteId() })
+    );
   }
 }

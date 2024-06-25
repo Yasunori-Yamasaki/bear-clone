@@ -1,4 +1,4 @@
-import { NoteActions } from "@actions/note.actions";
+import { NotePageActions } from "@actions/note.actions";
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { EditorComponent } from "@components/editor/editor.component";
@@ -29,11 +29,11 @@ export class SelectedComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params) => {
       const noteId = params["id"];
 
-      this.store.dispatch(NoteActions.setSelectedNote({ noteId, notes: this.deletedNotes() }));
+      this.store.dispatch(NotePageActions.setSelectedNote({ noteId, notes: this.deletedNotes() }));
     });
   }
 
   ngOnDestroy(): void {
-    this.store.dispatch(NoteActions.resetSelectedNote());
+    this.store.dispatch(NotePageActions.resetSelectedNote());
   }
 }

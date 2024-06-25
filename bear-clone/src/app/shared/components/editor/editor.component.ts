@@ -1,4 +1,4 @@
-import { NoteActions } from "@actions/note.actions";
+import { NoteLocalStorageActions } from "@actions/note.actions";
 import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -37,6 +37,6 @@ export class EditorComponent {
   update({ html, text }: ContentChange, note: Note | null): void {
     if (!note) return;
 
-    this.store.dispatch(NoteActions.updateNotes({ noteId: note.id, html, text }));
+    this.store.dispatch(NoteLocalStorageActions.updateNotes({ noteId: note.id, html, text }));
   }
 }

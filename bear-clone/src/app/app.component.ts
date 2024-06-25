@@ -1,4 +1,4 @@
-import { NoteActions } from "@actions/note.actions";
+import { NoteLocalStorageActions } from "@actions/note.actions";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { SidebarComponent } from "@components/sidebar/sidebar.component";
@@ -21,6 +21,6 @@ export class AppComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(NoteActions.getInitialNotes());
+    this.store.dispatch(NoteLocalStorageActions.getInitialNotes());
   }
 }
