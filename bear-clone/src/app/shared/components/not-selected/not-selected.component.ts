@@ -6,5 +6,8 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   templateUrl: "./not-selected.component.html",
+  host: {
+    class: "flex items-center justify-center text-3xl text-[#888889]",
+  },
 })
 export class NotSelectedComponent {}
