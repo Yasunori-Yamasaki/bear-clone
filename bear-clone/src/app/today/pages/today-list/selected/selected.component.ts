@@ -5,6 +5,7 @@ import { EditorComponent } from "@components/editor/editor.component";
 import { NoteListComponent } from "@components/note-list/note-list.component";
 import { Store } from "@ngrx/store";
 import { selectAllTodayNotes, selectSelectedNote } from "@selectors/note.selectors";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-selected",
@@ -20,13 +21,15 @@ export class SelectedComponent {
   protected todayNotes = this.store.selectSignal(selectAllTodayNotes);
   protected selectedNote = this.store.selectSignal(selectSelectedNote);
 
+  private routeSubscription?: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.routeSubscription = this.route.params.subscribe((params) => {
       const noteId = params["id"];
 
       this.store.dispatch(NotePageActions.setSelectedNote({ noteId, notes: this.todayNotes() }));
@@ -34,6 +37,10 @@ export class SelectedComponent {
   }
 
   ngOnDestroy(): void {
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
+
     this.store.dispatch(NotePageActions.resetSelectedNote());
   }
 }

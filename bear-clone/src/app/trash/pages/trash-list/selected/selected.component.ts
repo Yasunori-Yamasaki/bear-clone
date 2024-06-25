@@ -5,6 +5,7 @@ import { EditorComponent } from "@components/editor/editor.component";
 import { NoteListComponent } from "@components/note-list/note-list.component";
 import { Store } from "@ngrx/store";
 import { selectAllDeletedNotes, selectSelectedNote } from "@selectors/note.selectors";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-selected",
@@ -20,13 +21,15 @@ export class SelectedComponent implements OnInit, OnDestroy {
   protected deletedNotes = this.store.selectSignal(selectAllDeletedNotes);
   protected selectedNote = this.store.selectSignal(selectSelectedNote);
 
+  private routeSubscription?: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.routeSubscription = this.route.params.subscribe((params) => {
       const noteId = params["id"];
 
       this.store.dispatch(NotePageActions.setSelectedNote({ noteId, notes: this.deletedNotes() }));
@@ -34,6 +37,10 @@ export class SelectedComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
+
     this.store.dispatch(NotePageActions.resetSelectedNote());
   }
 }
