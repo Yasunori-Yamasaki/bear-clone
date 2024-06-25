@@ -56,7 +56,7 @@ export class NoteApiService {
    * @param html リッチテキストコンテンツ
    * @param text リッチテキスト内のテキストのみコンテンツ
    */
-  update(noteId: Note["id"], html: ContentChange["html"], text: ContentChange["text"]): Note[] {
+  update(noteId: Note["id"], html: ContentChange["html"], text: ContentChange["text"]): Note {
     const allNotes = this.localStorageService.get();
     const newNotes = allNotes.map((note) => {
       if (note.id !== noteId) return note;
@@ -70,8 +70,11 @@ export class NoteApiService {
       };
     });
 
+    const updatedNote = newNotes.find((note) => note.id === noteId);
+    if (!updatedNote) throw new Error(`ID:${noteId}のメモデータが見つかりませんでした。`);
+
     this.localStorageService.save(newNotes);
-    return newNotes;
+    return updatedNote;
   }
 
   setNewCreateNote(notes: Note[]): Note {

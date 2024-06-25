@@ -62,7 +62,10 @@ export class NoteEffects {
       ofType(NoteActions.updateNotes),
       switchMap(({ noteId, html, text }) => {
         return of(this.noteApiService.update(noteId, html, text)).pipe(
-          map((newNotes) => NoteActions.updateNotesSuccess({ newNotes }))
+          map(() => {
+            const newNotes = this.noteApiService.getAll();
+            return NoteActions.updateNotesSuccess({ newNotes });
+          })
         );
       })
     )
