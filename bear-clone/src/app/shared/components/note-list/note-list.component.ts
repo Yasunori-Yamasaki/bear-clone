@@ -1,5 +1,4 @@
 import { NoteLocalStorageActions, NotePageActions } from "@actions/note.actions";
-import { CommonModule } from "@angular/common";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -26,7 +25,6 @@ import { Subscription } from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     FontAwesomeModule,
-    CommonModule,
     SearchBoxComponent,
     CreateAndSearchBtnComponent,
     NoteItemComponent,

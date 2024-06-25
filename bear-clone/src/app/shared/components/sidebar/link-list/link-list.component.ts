@@ -1,6 +1,6 @@
 import { CategoryActions } from "@actions/category.actions";
 import { NotePageActions } from "@actions/note.actions";
-import { AsyncPipe, NgClass, NgStyle } from "@angular/common";
+import { NgClass, NgStyle } from "@angular/common";
 import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -13,7 +13,7 @@ import { selectSelectedCategory } from "@selectors/category.selectors";
   selector: "app-link-list",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, FontAwesomeModule, RouterLink, NgClass, NgStyle],
+  imports: [FontAwesomeModule, RouterLink, NgClass, NgStyle],
   templateUrl: "./link-list.component.html",
 })
 export class LinkListComponent {

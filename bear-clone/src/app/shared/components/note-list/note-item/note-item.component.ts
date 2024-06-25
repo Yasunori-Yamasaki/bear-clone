@@ -1,5 +1,5 @@
 import { NoteLocalStorageActions } from "@actions/note.actions";
-import { CommonModule } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
@@ -11,7 +11,7 @@ import { FormatDatePipe } from "@pipes/format-date.pipe";
   selector: "app-note-item",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, FormatDatePipe, FontAwesomeModule],
+  imports: [FormatDatePipe, FontAwesomeModule, NgClass],
   templateUrl: "./note-item.component.html",
 })
 export class NoteItemComponent {
