@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Note } from "@models/note.model";
 import { Store } from "@ngrx/store";
-import { CategoryService } from "@services/category.service";
 import { ContentChange, QuillModule, QuillModules } from "ngx-quill";
 
 @Component({
@@ -25,10 +24,7 @@ export class EditorComponent {
     toolbar: "#toolbar",
   };
 
-  constructor(
-    private store: Store,
-    protected categoryService: CategoryService
-  ) {}
+  constructor(private store: Store) {}
 
   /**
    * ローカルストレージ内の該当メモデータを更新

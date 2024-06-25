@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, output } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { CategoryService } from "@services/category.service";
+import { Store } from "@ngrx/store";
+import { selectSelectedCategory } from "@selectors/category.selectors";
 
 @Component({
   selector: "app-create-and-search-btn",
@@ -14,25 +15,18 @@ import { CategoryService } from "@services/category.service";
     class: "ticky top-0 flex h-12 items-center justify-between bg-white p-1",
   },
 })
-export class CreateAndSearchBtnComponent implements OnInit {
-  toggle = output<void>();
-  create = output<void>();
+export class CreateAndSearchBtnComponent {
+  public toggle = output<void>();
+  public create = output<void>();
 
-  protected selectedCategory!: string;
-
+  protected selectedCategory = this.store.selectSignal(selectSelectedCategory);
   protected faMagnifyingGlass = faMagnifyingGlass;
   protected faPenToSquare = faPenToSquare;
 
-  constructor(protected categoryService: CategoryService) {}
-
-  ngOnInit(): void {
-    this.categoryService.selectedCategory.subscribe((category) => {
-      this.selectedCategory = category;
-    });
-  }
+  constructor(private store: Store) {}
 
   createNote(): void {
-    if (this.selectedCategory === "Trash") return;
+    if (this.selectedCategory() === "Trash") return;
 
     this.create.emit();
   }

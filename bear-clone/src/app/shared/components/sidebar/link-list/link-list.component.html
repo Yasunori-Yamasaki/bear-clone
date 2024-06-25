@@ -2,7 +2,7 @@
   class="select-none py-0.5"
   [routerLink]="wrapCategory().name.toLowerCase()"
   [ngClass]="{
-    'rounded-md bg-[#FF4C43]': (categoryService.selectedCategory | async) === wrapCategory().name,
+    'rounded-md bg-[#FF4C43]': selectedCategory() === wrapCategory().name,
   }"
   [ngStyle]="{ 'padding-left': calcPaddingLeft(level()) }"
   (click)="changeCategory(wrapCategory().name)"
