@@ -14,6 +14,7 @@ import { CreateAndSearchBtnComponent } from "@components/create-and-search-btn/c
 import { NoteItemComponent } from "@components/note-list/note-item/note-item.component";
 import { SearchBoxComponent } from "@components/note-list/search-box/search-box.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { Category } from "@models/category.model";
 import { Note } from "@models/note.model";
 import { Store } from "@ngrx/store";
 import { selectSelectedNote } from "@selectors/note.selectors";
@@ -37,7 +38,7 @@ import { Subscription } from "rxjs";
   },
 })
 export class NoteListComponent implements OnInit, OnDestroy {
-  public category = input.required<string>();
+  public category = input.required<Category["name"]>();
   public notes = input.required<Note[]>();
 
   protected selectedNote = this.store.selectSignal(selectSelectedNote);
