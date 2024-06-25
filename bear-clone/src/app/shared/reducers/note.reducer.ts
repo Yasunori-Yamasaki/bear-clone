@@ -9,8 +9,8 @@ export const noteReducer = createReducer<State>(
   on(NoteActions.getInitialNotesSuccess, (state, { allNotes }) => {
     return { ...state, notes: allNotes };
   }),
-  on(NoteActions.addNotesSuccess, (state, { newNotes }) => {
-    return { ...state, notes: newNotes };
+  on(NoteActions.addNotesSuccess, (state, { newNote }) => {
+    return { ...state, notes: [...state.notes, newNote] };
   }),
   on(NoteActions.removeNotesSuccess, (state, { newNotes }) => {
     return { ...state, notes: newNotes };

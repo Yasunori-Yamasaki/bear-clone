@@ -29,10 +29,9 @@ export class NoteEffects {
       ofType(NoteActions.addNotes),
       switchMap(() => {
         return of(this.noteApiService.create()).pipe(
-          map((newNotes) =>
+          map((newNote) =>
             NoteActions.addNotesSuccess({
-              newNotes,
-              createNoteId: newNotes[newNotes.length - 1].id,
+              newNote,
             })
           )
         );
@@ -72,8 +71,8 @@ export class NoteEffects {
     () =>
       this.actions$.pipe(
         ofType(NoteActions.addNotesSuccess),
-        tap(({ createNoteId }) => {
-          this.router.navigate(["/notes", createNoteId]);
+        tap(({ newNote }) => {
+          this.router.navigate(["/notes", newNote.id]);
         })
       ),
     { dispatch: false }

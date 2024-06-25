@@ -21,11 +21,12 @@ export class NoteApiService {
   /**
    * 新規メモの作成処理
    */
-  create(): Note[] {
-    const newNotes = this.setNewCreateNotes(this.localStorageService.get());
-    this.localStorageService.save(newNotes);
+  create(): Note {
+    const notes = this.localStorageService.get();
+    const newNote = this.setNewCreateNote(notes);
 
-    return newNotes;
+    this.localStorageService.save([...notes, newNote]);
+    return newNote;
   }
 
   /**
@@ -71,10 +72,11 @@ export class NoteApiService {
     return newNotes;
   }
 
-  setNewCreateNotes(notes: Note[]): Note[] {
+  setNewCreateNote(notes: Note[]): Note {
     const latestId = !notes.length ? 1 : parseInt(notes[notes.length - 1].id) + 1;
     const now = dayjs();
-    const newNote: Note = {
+
+    return {
       id: latestId.toString(),
       title: "",
       content: "",
@@ -83,7 +85,5 @@ export class NoteApiService {
       updatedAt: now.format("YYYY-MM-DD HH:mm:ss"),
       isDeleted: false,
     };
-
-    return [...notes, newNote];
   }
 }
