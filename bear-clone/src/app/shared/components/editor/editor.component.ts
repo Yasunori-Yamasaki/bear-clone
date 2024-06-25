@@ -30,7 +30,7 @@ export class EditorComponent {
    * ローカルストレージ内の該当メモデータを更新
    * @param event リッチエディタのコンテンツ内容変更イベント
    */
-  update({ html, text }: ContentChange, note: Note | null): void {
+  protected update({ html, text }: ContentChange, note: Note | null): void {
     if (!note) return;
 
     this.store.dispatch(NoteLocalStorageActions.updateNotes({ noteId: note.id, html, text }));

@@ -25,7 +25,7 @@ export class CreateAndSearchBtnComponent {
 
   constructor(private store: Store) {}
 
-  createNote(): void {
+  protected createNote(): void {
     if (this.selectedCategory() === "Trash") return;
 
     this.create.emit();

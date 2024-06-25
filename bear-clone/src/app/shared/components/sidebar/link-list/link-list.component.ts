@@ -31,7 +31,7 @@ export class LinkListComponent {
    * @param level 階層(入れ子)段階
    * @returns padding-leftの適用値
    */
-  calcPaddingLeft(level: number): string {
+  protected calcPaddingLeft(level: number): string {
     const basePadding = 2;
 
     return `${basePadding + level}rem`;
@@ -42,7 +42,7 @@ export class LinkListComponent {
    * - メモは未選択状態へ変更
    * @param name 選択したカテゴリー名
    */
-  changeCategory(category: Category["name"]): void {
+  protected changeCategory(category: Category["name"]): void {
     this.store.dispatch(CategoryActions.changeCategory({ category }));
     this.store.dispatch(NotePageActions.resetSelectedNote());
   }

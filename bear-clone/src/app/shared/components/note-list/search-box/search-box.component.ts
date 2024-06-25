@@ -13,9 +13,9 @@ import { faCircleXmark, faMagnifyingGlass } from "@fortawesome/free-solid-svg-ic
   },
 })
 export class SearchBoxComponent {
-  toggle = output();
-  search = output<string>();
-  inputVal = input.required<string>();
+  public toggle = output();
+  public search = output<string>();
+  public inputVal = input.required<string>();
 
   protected faMagnifyingGlass = faMagnifyingGlass;
   protected faCircleXmark = faCircleXmark;

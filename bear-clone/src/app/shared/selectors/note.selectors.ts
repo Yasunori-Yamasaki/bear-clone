@@ -42,6 +42,9 @@ export const selectAllDeletedNotes = createSelector(selectNotesState, ({ notes }
   return notes.filter((note) => note.isDeleted);
 });
 
+/**
+ * 選択中のメモデータを取得
+ */
 export const selectSelectedNote = createSelector(
   selectNotesState,
   ({ selectedNote }) => selectedNote

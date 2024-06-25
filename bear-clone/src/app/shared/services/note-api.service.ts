@@ -77,7 +77,10 @@ export class NoteApiService {
     return updatedNote;
   }
 
-  setNewCreateNote(notes: Note[]): Note {
+  /**
+   * 空のメモデータオブジェクトを作成し返却
+   */
+  private setNewCreateNote(notes: Note[]): Note {
     const latestId = !notes.length ? 1 : parseInt(notes[notes.length - 1].id) + 1;
     const now = dayjs();
 

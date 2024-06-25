@@ -33,6 +33,10 @@ export class LocalStorageService {
     return Array.isArray(data) && data.every(this.isNote);
   }
 
+  /**
+   * メモデータの定義はmodelファイル内に記述
+   * @see {@link Note}
+   */
   isNote(datum: any): datum is Note {
     return (
       typeof datum.id === "string" &&

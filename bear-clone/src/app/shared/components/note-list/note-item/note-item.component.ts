@@ -27,7 +27,7 @@ export class NoteItemComponent {
    * Storeから該当メモを削除
    * @param noteId 削除対象メモID
    */
-  remove(noteId: string): void {
+  protected remove(noteId: string): void {
     this.store.dispatch(
       NoteLocalStorageActions.removeNotes({ noteId, selectedNoteId: this.selectedNoteId() })
     );
