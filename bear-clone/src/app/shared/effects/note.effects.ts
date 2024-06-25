@@ -44,13 +44,14 @@ export class NoteEffects {
       ofType(NoteActions.removeNotes),
       switchMap(({ noteId, selectedNoteId }) => {
         return of(this.noteApiService.delete(noteId)).pipe(
-          map((newNotes) =>
-            NoteActions.removeNotesSuccess({
+          map((deletedNote) => {
+            const newNotes = this.noteApiService.getAll();
+            return NoteActions.removeNotesSuccess({
               newNotes,
-              deleteNoteId: noteId,
+              deletedNote,
               selectedNoteId,
-            })
-          )
+            });
+          })
         );
       })
     )
@@ -82,8 +83,8 @@ export class NoteEffects {
     () =>
       this.actions$.pipe(
         ofType(NoteActions.removeNotesSuccess),
-        tap(({ deleteNoteId, selectedNoteId }) => {
-          if (selectedNoteId === deleteNoteId) {
+        tap(({ deletedNote, selectedNoteId }) => {
+          if (deletedNote.id === selectedNoteId) {
             this.router.navigate(["/notes"]);
           }
         })

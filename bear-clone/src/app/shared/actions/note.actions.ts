@@ -12,7 +12,7 @@ export const NoteActions = createActionGroup({
     "Remove Notes": props<{ noteId: Note["id"]; selectedNoteId: Note["id"] }>(),
     "Remove Notes Success": props<{
       newNotes: Note[];
-      deleteNoteId: Note["id"];
+      deletedNote: Note;
       selectedNoteId: Note["id"];
     }>(),
     "Update Notes": props<{

@@ -34,7 +34,7 @@ export class NoteApiService {
    * - 論理削除
    * @param noteId 削除対象メモID
    */
-  delete(noteId: string): Note[] {
+  delete(noteId: string): Note {
     const newNotes = this.localStorageService.get().map((note) => {
       if (note.id !== noteId) return note;
 
@@ -43,9 +43,11 @@ export class NoteApiService {
         isDeleted: true,
       };
     });
+    const deletedNote = newNotes.find((note) => note.id === noteId);
+    if (!deletedNote) throw new Error(`ID:${noteId}のメモデータが見つかりませんでした。`);
 
     this.localStorageService.save(newNotes);
-    return newNotes;
+    return deletedNote;
   }
 
   /**
