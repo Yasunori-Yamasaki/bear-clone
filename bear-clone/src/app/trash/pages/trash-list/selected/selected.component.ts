@@ -1,11 +1,18 @@
 import { NotePageActions } from "@actions/note.actions";
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  OnDestroy,
+  OnInit,
+  inject,
+} from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ActivatedRoute } from "@angular/router";
 import { EditorComponent } from "@components/editor/editor.component";
 import { NoteListComponent } from "@components/note-list/note-list.component";
 import { Store } from "@ngrx/store";
 import { selectAllDeletedNotes, selectSelectedNote } from "@selectors/note.selectors";
-import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-selected",
@@ -21,7 +28,7 @@ export class SelectedComponent implements OnInit, OnDestroy {
   protected deletedNotes = this.store.selectSignal(selectAllDeletedNotes);
   protected selectedNote = this.store.selectSignal(selectSelectedNote);
 
-  private routeSubscription?: Subscription;
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +36,7 @@ export class SelectedComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.routeSubscription = this.route.params.subscribe((params) => {
+    this.route.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       const noteId = params["id"];
 
       this.store.dispatch(NotePageActions.setSelectedNote({ noteId, notes: this.deletedNotes() }));
@@ -37,10 +44,6 @@ export class SelectedComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.routeSubscription) {
-      this.routeSubscription.unsubscribe();
-    }
-
     this.store.dispatch(NotePageActions.resetSelectedNote());
   }
 }

@@ -2,12 +2,14 @@ import { NoteLocalStorageActions, NotePageActions } from "@actions/note.actions"
 import {
   ChangeDetectionStrategy,
   Component,
-  OnDestroy,
+  DestroyRef,
   OnInit,
   computed,
+  inject,
   input,
   signal,
 } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { CreateAndSearchBtnComponent } from "@components/create-and-search-btn/create-and-search-btn.component";
 import { NoteItemComponent } from "@components/note-list/note-item/note-item.component";
@@ -17,7 +19,6 @@ import { Category } from "@models/category.model";
 import { Note } from "@models/note.model";
 import { Store } from "@ngrx/store";
 import { selectSelectedNote } from "@selectors/note.selectors";
-import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-note-list",
@@ -35,7 +36,7 @@ import { Subscription } from "rxjs";
     class: "solid flex flex-col h-[100vh] w-60 overflow-y-auto border-r border-zinc-300",
   },
 })
-export class NoteListComponent implements OnInit, OnDestroy {
+export class NoteListComponent implements OnInit {
   public category = input.required<Category["name"]>();
   public notes = input.required<Note[]>();
 
@@ -53,7 +54,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
     );
   });
 
-  private routeSubscription?: Subscription;
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private route: ActivatedRoute,
@@ -61,19 +62,13 @@ export class NoteListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.routeSubscription = this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       this.inputVal.set(params["search"] ?? "");
 
       if (!!this.inputVal()) {
         this.isSearchMode.set(true);
       }
     });
-  }
-
-  ngOnDestroy(): void {
-    if (this.routeSubscription) {
-      this.routeSubscription.unsubscribe();
-    }
   }
 
   /**
