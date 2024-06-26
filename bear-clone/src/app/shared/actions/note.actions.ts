@@ -14,7 +14,6 @@ export const NoteLocalStorageActions = createActionGroup({
     // メモ削除処理
     "Remove Notes": props<{ noteId: Note["id"]; selectedNoteId: Note["id"] }>(),
     "Remove Notes Success": props<{
-      newNotes: Note[];
       deletedNote: Note;
       selectedNoteId: Note["id"];
     }>(),
@@ -24,7 +23,7 @@ export const NoteLocalStorageActions = createActionGroup({
       html: ContentChange["html"];
       text: ContentChange["text"];
     }>(),
-    "Update Notes Success": props<{ newNotes: Note[] }>(),
+    "Update Notes Success": props<{ updatedNote: Note }>(),
   },
 });
 

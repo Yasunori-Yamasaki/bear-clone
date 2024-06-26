@@ -44,14 +44,12 @@ export class NoteEffects {
       ofType(NoteLocalStorageActions.removeNotes),
       switchMap(({ noteId, selectedNoteId }) => {
         return of(this.noteApiService.delete(noteId)).pipe(
-          map((deletedNote) => {
-            const newNotes = this.noteApiService.getAll();
-            return NoteLocalStorageActions.removeNotesSuccess({
-              newNotes,
+          map((deletedNote) =>
+            NoteLocalStorageActions.removeNotesSuccess({
               deletedNote,
               selectedNoteId,
-            });
-          })
+            })
+          )
         );
       })
     )
@@ -62,10 +60,7 @@ export class NoteEffects {
       ofType(NoteLocalStorageActions.updateNotes),
       switchMap(({ noteId, html, text }) => {
         return of(this.noteApiService.update(noteId, html, text)).pipe(
-          map(() => {
-            const newNotes = this.noteApiService.getAll();
-            return NoteLocalStorageActions.updateNotesSuccess({ newNotes });
-          })
+          map((updatedNote) => NoteLocalStorageActions.updateNotesSuccess({ updatedNote }))
         );
       })
     )

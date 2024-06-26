@@ -12,10 +12,22 @@ export const noteReducer = createReducer<State>(
   on(NoteLocalStorageActions.addNotesSuccess, (state, { newNote }) => {
     return { ...state, notes: [...state.notes, newNote] };
   }),
-  on(NoteLocalStorageActions.removeNotesSuccess, (state, { newNotes }) => {
+  on(NoteLocalStorageActions.removeNotesSuccess, (state, { deletedNote }) => {
+    const newNotes = state.notes.map((note) => {
+      if (note.id !== deletedNote.id) return note;
+
+      return deletedNote;
+    });
+
     return { ...state, notes: newNotes };
   }),
-  on(NoteLocalStorageActions.updateNotesSuccess, (state, { newNotes }) => {
+  on(NoteLocalStorageActions.updateNotesSuccess, (state, { updatedNote }) => {
+    const newNotes = state.notes.map((note) => {
+      if (note.id !== updatedNote.id) return note;
+
+      return updatedNote;
+    });
+
     return { ...state, notes: newNotes };
   }),
   on(NotePageActions.updateSelectedNote, (state, { newNote }) => {
