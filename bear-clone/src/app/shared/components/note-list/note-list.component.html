@@ -1,0 +1,29 @@
+<header>
+  @if (isSearchMode()) {
+    <app-search-box
+      (toggle)="isSearchMode.set(!isSearchMode()); inputVal.set('')"
+      (search)="inputVal.set($event)"
+      [inputVal]="inputVal()"
+    />
+  } @else {
+    <app-create-and-search-btn (create)="add()" (toggle)="isSearchMode.set(!isSearchMode())" />
+  }
+</header>
+<a class="w-full flex-1 cursor-auto" [routerLink]="['/', category().toLowerCase()]">
+  <ul class="px-2">
+    @for (note of filteredNotes(); track note) {
+      <li>
+        <a
+          [routerLink]="['/', category().toLowerCase(), note.id]"
+          (click)="$event.stopPropagation()"
+        >
+          <app-note-item
+            [isSelected]="note.id === selectedNote()?.id"
+            [note]="note"
+            [selectedNoteId]="selectedNote()?.id!"
+          />
+        </a>
+      </li>
+    }
+  </ul>
+</a>

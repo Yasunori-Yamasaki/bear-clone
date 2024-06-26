@@ -1,0 +1,12 @@
+<input
+  #searchBox
+  type="text"
+  class="solid w-full rounded-md border-4 border-[#F4BABA] pl-6 placeholder:text-sm focus:outline-none"
+  placeholder="Search"
+  (input)="search.emit(searchBox.value)"
+  [value]="inputVal()"
+/>
+<fa-icon [icon]="faMagnifyingGlass" class="absolute left-4 text-sm text-[#888889]" />
+<button class="absolute right-4 text-[#888889]" (click)="toggle.emit()">
+  <fa-icon [icon]="faCircleXmark" />
+</button>

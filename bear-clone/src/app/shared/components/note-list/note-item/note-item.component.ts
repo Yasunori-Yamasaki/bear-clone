@@ -1,0 +1,35 @@
+import { NoteLocalStorageActions } from "@actions/note.actions";
+import { NgClass } from "@angular/common";
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { Note } from "@models/note.model";
+import { Store } from "@ngrx/store";
+import { FormatDatePipe } from "@pipes/format-date.pipe";
+
+@Component({
+  selector: "app-note-item",
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [FormatDatePipe, FontAwesomeModule, NgClass],
+  templateUrl: "./note-item.component.html",
+})
+export class NoteItemComponent {
+  public isSelected = input.required<boolean>();
+  public note = input.required<Note>();
+  public selectedNoteId = input.required<Note["id"]>();
+
+  protected faTrashCan = faTrashCan;
+
+  constructor(private store: Store) {}
+
+  /**
+   * Storeから該当メモを削除
+   * @param noteId 削除対象メモID
+   */
+  protected remove(noteId: string): void {
+    this.store.dispatch(
+      NoteLocalStorageActions.removeNotes({ noteId, selectedNoteId: this.selectedNoteId() })
+    );
+  }
+}
