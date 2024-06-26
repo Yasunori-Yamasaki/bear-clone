@@ -1,9 +1,8 @@
+import { NoteLocalStorageActions } from "@actions/note.actions";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
+import { SidebarComponent } from "@components/sidebar/sidebar.component";
 import { Store } from "@ngrx/store";
-import { NoteActions } from "./shared/actions/note.actions";
-import { selectSelectedNote } from "./shared/selectors/note.selectors";
-import { SidebarComponent } from "./shared/components/sidebar/sidebar.component";
 
 @Component({
   selector: "app-root",
@@ -16,11 +15,9 @@ import { SidebarComponent } from "./shared/components/sidebar/sidebar.component"
   },
 })
 export class AppComponent implements OnInit {
-  protected selectedNote = this.store.selectSignal(selectSelectedNote);
-
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(NoteActions.getInitialNotes());
+    this.store.dispatch(NoteLocalStorageActions.getInitialNotes());
   }
 }

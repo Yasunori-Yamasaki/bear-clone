@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
-import { ContentChange, QuillModule, QuillModules } from "ngx-quill";
-import { Note } from "../../models/note.model";
-import { FormsModule } from "@angular/forms";
-import { Store } from "@ngrx/store";
-import { NoteActions } from "../../actions/note.actions";
-import { CategoryService } from "../../services/category.service";
+import { NoteLocalStorageActions } from "@actions/note.actions";
 import { AsyncPipe } from "@angular/common";
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { Note } from "@models/note.model";
+import { Store } from "@ngrx/store";
+import { ContentChange, QuillModule, QuillModules } from "ngx-quill";
 
 @Component({
   selector: "app-editor",
@@ -18,25 +17,22 @@ import { AsyncPipe } from "@angular/common";
   },
 })
 export class EditorComponent {
-  @Input({ required: true }) note!: Note | null;
-  @Input() readOnly = false;
+  public note = input.required<Note | null>();
+  public readOnly = input<boolean>(false);
 
   protected modules: QuillModules = {
     toolbar: "#toolbar",
   };
 
-  constructor(
-    private store: Store,
-    protected categoryService: CategoryService
-  ) {}
+  constructor(private store: Store) {}
 
   /**
    * ローカルストレージ内の該当メモデータを更新
    * @param event リッチエディタのコンテンツ内容変更イベント
    */
-  update({ html, text }: ContentChange): void {
-    if (!this.note) return;
+  protected update({ html, text }: ContentChange, note: Note | null): void {
+    if (!note) return;
 
-    this.store.dispatch(NoteActions.updateNotes({ noteId: this.note.id, html, text }));
+    this.store.dispatch(NoteLocalStorageActions.updateNotes({ noteId: note.id, html, text }));
   }
 }

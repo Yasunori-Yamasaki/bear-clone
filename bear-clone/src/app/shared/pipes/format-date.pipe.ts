@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 
 /**
  * 与えられた日時を現在との時間差によって下記にフォーマットする。
+ * - 秒数まで一緒： Just now
  * - 1分以内：~~ seconds ago
  * - 1時間以内：~~ minutes ago
  * - 1日以内：~~ hours ago

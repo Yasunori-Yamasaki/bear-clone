@@ -18,10 +18,17 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"],
+    "paths": {
+      "@actions/*": ["./src/app/shared/actions/*"],
+      "@components/*": ["./src/app/shared/components/*"],
+      "@effects/*": ["./src/app/shared/effects/*"],
+      "@models/*": ["./src/app/shared/models/*"],
+      "@pipes/*": ["./src/app/shared/pipes/*"],
+      "@reducers/*": ["./src/app/shared/reducers/*"],
+      "@selectors/*": ["./src/app/shared/selectors/*"],
+      "@services/*": ["./src/app/shared/services/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,6 +1,6 @@
+import { State } from "@models/note.model";
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { noteFeatureKey } from "../reducers/note.reducer";
-import { Note, State } from "../models/note.model";
+import { noteFeatureKey } from "@reducers/note.reducer";
 import dayjs from "dayjs";
 
 export const selectNotesState = createFeatureSelector<State>(noteFeatureKey);
@@ -42,6 +42,9 @@ export const selectAllDeletedNotes = createSelector(selectNotesState, ({ notes }
   return notes.filter((note) => note.isDeleted);
 });
 
+/**
+ * 選択中のメモデータを取得
+ */
 export const selectSelectedNote = createSelector(
   selectNotesState,
   ({ selectedNote }) => selectedNote

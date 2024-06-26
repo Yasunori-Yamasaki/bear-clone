@@ -1,5 +1,5 @@
+import { initialState } from "@models/note.model";
 import { noteReducer } from "./note.reducer";
-import { initialState } from "../models/note.model";
 
 describe("Note Reducer", () => {
   describe("an unknown action", () => {

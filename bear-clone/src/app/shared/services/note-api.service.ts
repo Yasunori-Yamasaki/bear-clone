@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Note } from "../models/note.model";
-import { ContentChange } from "ngx-quill";
+import { Note } from "@models/note.model";
+import { LocalStorageService } from "@services/local-storage.service";
 import dayjs from "dayjs";
-import { LocalStorageService } from "./local-storage.service";
+import { ContentChange } from "ngx-quill";
 
 @Injectable({
   providedIn: "root",
@@ -21,11 +21,12 @@ export class NoteApiService {
   /**
    * 新規メモの作成処理
    */
-  create(): Note[] {
-    const newNotes = this.setNewCreateNotes(this.localStorageService.get());
-    this.localStorageService.save(newNotes);
+  create(): Note {
+    const notes = this.localStorageService.get();
+    const newNote = this.setNewCreateNote(notes);
 
-    return newNotes;
+    this.localStorageService.save([...notes, newNote]);
+    return newNote;
   }
 
   /**
@@ -33,7 +34,7 @@ export class NoteApiService {
    * - 論理削除
    * @param noteId 削除対象メモID
    */
-  delete(noteId: string): Note[] {
+  delete(noteId: string): Note {
     const newNotes = this.localStorageService.get().map((note) => {
       if (note.id !== noteId) return note;
 
@@ -42,9 +43,11 @@ export class NoteApiService {
         isDeleted: true,
       };
     });
+    const deletedNote = newNotes.find((note) => note.id === noteId);
+    if (!deletedNote) throw new Error(`ID:${noteId}のメモデータが見つかりませんでした。`);
 
     this.localStorageService.save(newNotes);
-    return newNotes;
+    return deletedNote;
   }
 
   /**
@@ -53,7 +56,7 @@ export class NoteApiService {
    * @param html リッチテキストコンテンツ
    * @param text リッチテキスト内のテキストのみコンテンツ
    */
-  update(noteId: Note["id"], html: ContentChange["html"], text: ContentChange["text"]): Note[] {
+  update(noteId: Note["id"], html: ContentChange["html"], text: ContentChange["text"]): Note {
     const allNotes = this.localStorageService.get();
     const newNotes = allNotes.map((note) => {
       if (note.id !== noteId) return note;
@@ -67,14 +70,21 @@ export class NoteApiService {
       };
     });
 
+    const updatedNote = newNotes.find((note) => note.id === noteId);
+    if (!updatedNote) throw new Error(`ID:${noteId}のメモデータが見つかりませんでした。`);
+
     this.localStorageService.save(newNotes);
-    return newNotes;
+    return updatedNote;
   }
 
-  setNewCreateNotes(notes: Note[]): Note[] {
+  /**
+   * 空のメモデータオブジェクトを作成し返却
+   */
+  private setNewCreateNote(notes: Note[]): Note {
     const latestId = !notes.length ? 1 : parseInt(notes[notes.length - 1].id) + 1;
     const now = dayjs();
-    const newNote: Note = {
+
+    return {
       id: latestId.toString(),
       title: "",
       content: "",
@@ -83,7 +93,5 @@ export class NoteApiService {
       updatedAt: now.format("YYYY-MM-DD HH:mm:ss"),
       isDeleted: false,
     };
-
-    return [...notes, newNote];
   }
 }

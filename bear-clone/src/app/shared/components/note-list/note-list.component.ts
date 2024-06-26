@@ -1,22 +1,24 @@
+import { NoteLocalStorageActions, NotePageActions } from "@actions/note.actions";
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
+  DestroyRef,
   OnInit,
   computed,
+  inject,
   input,
   signal,
 } from "@angular/core";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { CommonModule } from "@angular/common";
-import { Store } from "@ngrx/store";
-import { SearchBoxComponent } from "./search-box/search-box.component";
-import { NoteItemComponent } from "./note-item/note-item.component";
-import { Note } from "../../models/note.model";
-import { NoteActions } from "../../actions/note.actions";
-import { selectSelectedNote } from "../../selectors/note.selectors";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ActivatedRoute, RouterLink } from "@angular/router";
-import { CreateAndSearchBtnComponent } from "../create-and-search-btn/create-and-search-btn.component";
+import { CreateAndSearchBtnComponent } from "@components/create-and-search-btn/create-and-search-btn.component";
+import { NoteItemComponent } from "@components/note-list/note-item/note-item.component";
+import { SearchBoxComponent } from "@components/note-list/search-box/search-box.component";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { Category } from "@models/category.model";
+import { Note } from "@models/note.model";
+import { Store } from "@ngrx/store";
+import { selectSelectedNote } from "@selectors/note.selectors";
 
 @Component({
   selector: "app-note-list",
@@ -24,7 +26,6 @@ import { CreateAndSearchBtnComponent } from "../create-and-search-btn/create-and
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     FontAwesomeModule,
-    CommonModule,
     SearchBoxComponent,
     CreateAndSearchBtnComponent,
     NoteItemComponent,
@@ -36,7 +37,9 @@ import { CreateAndSearchBtnComponent } from "../create-and-search-btn/create-and
   },
 })
 export class NoteListComponent implements OnInit {
-  notes = input.required<Note[]>();
+  public category = input.required<Category["name"]>();
+  public notes = input.required<Note[]>();
+
   protected selectedNote = this.store.selectSignal(selectSelectedNote);
   protected isSearchMode = signal(false);
   protected inputVal = signal("");
@@ -50,7 +53,8 @@ export class NoteListComponent implements OnInit {
       ({ title, content }) => title.includes(this.inputVal()) || content.includes(this.inputVal())
     );
   });
-  @Input({ required: true }) category!: string;
+
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private route: ActivatedRoute,
@@ -58,7 +62,7 @@ export class NoteListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       this.inputVal.set(params["search"] ?? "");
 
       if (!!this.inputVal()) {
@@ -70,10 +74,10 @@ export class NoteListComponent implements OnInit {
   /**
    * Storeに新規メモを追加 ＆ 新規メモを選択状態にする
    */
-  add(): void {
+  protected add(): void {
     const newNote = this.notes()[this.notes().length - 1];
 
-    this.store.dispatch(NoteActions.addNotes());
-    this.store.dispatch(NoteActions.updateSelectedNote({ newNote }));
+    this.store.dispatch(NoteLocalStorageActions.addNotes());
+    this.store.dispatch(NotePageActions.updateSelectedNote({ newNote }));
   }
 }

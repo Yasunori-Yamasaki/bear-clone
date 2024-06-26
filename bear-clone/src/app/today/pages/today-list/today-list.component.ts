@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { NotSelectedComponent } from "@components/not-selected/not-selected.component";
+import { NoteListComponent } from "@components/note-list/note-list.component";
 import { Store } from "@ngrx/store";
-import { NoteListComponent } from "../../../shared/components/note-list/note-list.component";
-import { selectAllTodayNotes } from "../../../shared/selectors/note.selectors";
+import { selectAllTodayNotes } from "@selectors/note.selectors";
 
 @Component({
   selector: "app-today-list",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NoteListComponent],
+  imports: [NoteListComponent, NotSelectedComponent],
   templateUrl: "./today-list.component.html",
   host: {
     class: "grid grid-cols-noteList",

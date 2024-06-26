@@ -1,13 +1,11 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-import {
-  selectAllTodayNotes,
-  selectSelectedNote,
-} from "../../../../shared/selectors/note.selectors";
+import { NotePageActions } from "@actions/note.actions";
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ActivatedRoute } from "@angular/router";
+import { EditorComponent } from "@components/editor/editor.component";
+import { NoteListComponent } from "@components/note-list/note-list.component";
 import { Store } from "@ngrx/store";
-import { NoteActions } from "../../../../shared/actions/note.actions";
-import { EditorComponent } from "../../../../shared/components/editor/editor.component";
-import { NoteListComponent } from "../../../../shared/components/note-list/note-list.component";
+import { selectAllTodayNotes, selectSelectedNote } from "@selectors/note.selectors";
 
 @Component({
   selector: "app-selected",
@@ -23,20 +21,22 @@ export class SelectedComponent {
   protected todayNotes = this.store.selectSignal(selectAllTodayNotes);
   protected selectedNote = this.store.selectSignal(selectSelectedNote);
 
+  private destroyRef = inject(DestroyRef);
+
   constructor(
     private route: ActivatedRoute,
     private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.route.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       const noteId = params["id"];
 
-      this.store.dispatch(NoteActions.setSelectedNote({ noteId, notes: this.todayNotes() }));
+      this.store.dispatch(NotePageActions.setSelectedNote({ noteId, notes: this.todayNotes() }));
     });
   }
 
   ngOnDestroy(): void {
-    this.store.dispatch(NoteActions.resetSelectedNote());
+    this.store.dispatch(NotePageActions.resetSelectedNote());
   }
 }

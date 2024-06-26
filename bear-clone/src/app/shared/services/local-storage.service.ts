@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Note } from "../models/note.model";
-import dayjs from "dayjs";
-import { ContentChange } from "ngx-quill";
+import { Note } from "@models/note.model";
 
 @Injectable({
   providedIn: "root",
@@ -35,6 +33,10 @@ export class LocalStorageService {
     return Array.isArray(data) && data.every(this.isNote);
   }
 
+  /**
+   * メモデータの定義はmodelファイル内に記述
+   * @see {@link Note}
+   */
   isNote(datum: any): datum is Note {
     return (
       typeof datum.id === "string" &&
